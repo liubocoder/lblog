@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>刘波的学习记录</title>
+    <description></description>
+    <link>https://liubocode.gitee.io/</link>
+    <atom:link href="https://liubocode.gitee.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Fri, 04 Jun 2021 17:15:33 +0800</pubDate>
+    <lastBuildDate>Fri, 04 Jun 2021 17:15:33 +0800</lastBuildDate>
+    <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>测试博客</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#前言&quot; id=&quot;markdown-toc-前言&quot;&gt;前言&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+
+这是一篇测试用的文章，主要测试博客中的一些功能是否正常
+</description>
+        <pubDate>Mon, 31 May 2021 00:00:00 +0800</pubDate>
+        <link>https://liubocode.gitee.io/2021/05/31/hello-my-blog/</link>
+        <guid isPermaLink="true">https://liubocode.gitee.io/2021/05/31/hello-my-blog/</guid>
+        
+        <category>tag1</category>
+        
+        <category>tag2</category>
+        
+        <category>测试标签</category>
+        
+        
+        <category>c1</category>
+        
+        <category>c2</category>
+        
+        <category>测试类别</category>
+        
+      </item>
+    
+  </channel>
+</rss>
