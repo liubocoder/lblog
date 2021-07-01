@@ -134,6 +134,80 @@
             
               <li>
                 <h2>
+                  <a class="post-link" href="/2021/07/01/build-bazel/">Bazel构建工具</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2021-07-01
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>liubo
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Build" title="Category: Build" rel="category">Build</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Bazel" title="Tag: Bazel" rel="tag">Bazel</a>&nbsp;
+    
+        <a href="/tag/#Onos" title="Tag: Onos" rel="tag">Onos</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#bazel安装" id="markdown-toc-bazel安装">Bazel安装</a></li>
+</ul>
+
+<h2 id="前言">前言</h2>
+<p>Bazel是Google开源的构建工具，原生支持java、C++的编译，开源社区也有支持其他语言的编译的rule。本文根据ONOS2.6.0版本使用bazel编译过程来学习下bazel工具。</p>
+
+<h2 id="bazel安装">Bazel安装</h2>
+<p>bazelisk 是bazel的版本管理工具，不同版本的onos使用了不同版本的bazel，因此我们在编译onos的时候bazelisk会自动下载对应版本的bazel进行编译。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://github.com/bazelbuild/bazelisk/releases/download/v1.4.0/bazelisk-linux-amd64
+</code></pre></div></div>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2021/07/01/build-bazel/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
                   <a class="post-link" href="/2021/07/01/blog-create/">创建一个属于自己的博客</a>
                 </h2>
                 <div class="label">
@@ -187,10 +261,33 @@
                 <div class="excerpt">
                     <ul id="markdown-toc">
   <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#遇到的问题" id="markdown-toc-遇到的问题">遇到的问题</a></li>
 </ul>
 
 <h2 id="前言">前言</h2>
-<p>很多人可能都有一种想法，写点东西记录下学习或生活，好记忆不如烂笔头，现在开始用文字来记忆。</p>
+<p>很多人可能都有一种想法，写点东西记录下学习或生活，好记忆不如烂笔头，现在我们用博客来开启文字记忆。</p>
+
+<p>需要使用到的资源有：<a href="https://gitee.com/help/articles/4136">GiteePages</a>，<a href="http://jekyllcn.com/docs/">jekyll</a>，<a href="https://github.com/xudailong/xudailong.github.io">Theme</a>，主题是一个大牛开源的，只需要根据他的<a href="https://github.com/liubo11/xudailong.github.io/blob/master/README-zh-cn.md">中文文档</a>配置，基本可以完成搭建。</p>
+
+<h2 id="遇到的问题">遇到的问题</h2>
+<ol>
+  <li>
+    <p>不蒜子的域名过期
+根据<a href="http://ibruce.info/2015/04/04/busuanzi/">不蒜子网站</a>说明更改即可。</p>
+  </li>
+  <li>
+    <p>百度统计
+需要在<a href="https://tongji.baidu.com/web/welcome/products">百度统计官网</a>注册，更改_config.yml文件的配置，需要注意的是若网站1个月没有流量，可能失效。</p>
+  </li>
+  <li>
+    <p>文档撰写
+文档存放在_posts目录，使用Markdown语言编写，可参考<a href="https://www.runoob.com/markdown/md-tutorial.html">RUNOOB</a>的教程。</p>
+  </li>
+  <li>
+    <p>文档摘要
+在<code class="language-plaintext highlighter-rouge">_config.yml</code>中使用excerpt_separator来标记的，在本项目中使用的是四个连续空行</p>
+  </li>
+</ol>
 
                 </div>
                 <div class="read-all">
@@ -301,6 +398,8 @@
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2021/07/01/build-bazel/">Bazel构建工具</a></li>
+                    
                         <li><a href="/2021/07/01/blog-create/">创建一个属于自己的博客</a></li>
                     
                         <li><a href="/2021/05/31/hello-my-blog/">测试博客</a></li>
@@ -347,6 +446,15 @@
                         <a href="/category/#Blog" class="categories-list-item" cate="Blog">
                             <span class="name">
                                 Blog
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Build" class="categories-list-item" cate="Build">
+                            <span class="name">
+                                Build
                             </span>
                             <span class="badge">1</span>
                         </a>
@@ -403,6 +511,20 @@
                       
                       
                       <a href="/tag/#Markdown" style="font-size: 9pt; color: #999;">Markdown</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Bazel" style="font-size: 9pt; color: #999;">Bazel</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Onos" style="font-size: 9pt; color: #999;">Onos</a>
                     
                 </div>
             </div>

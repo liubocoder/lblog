@@ -10,6 +10,9 @@ type: page
 {:toc}
 
 ## 工具
+* [devdocs](https://devdocs.io/)
+
+    查询各类编程语言、框架的API文档、测试等
 
 * [box-shadow generator](http://www.cssmatic.com/box-shadow)
 
@@ -45,7 +48,31 @@ type: page
 - [google fonts](https://fonts.google.com/)
   - [Google Fonts 加速代理](https://fengmk2.com/blog/2016/google-fonts-mirror)
 
+## 构建工具
+
+### Gradle
+
+### Maven
+
+### Bazel
+
+### Make
+
+### CMake
+
+## 系统
+
+### Linux
+
+### Android
+
 ## 编程语言
+
+### Java
+
+### C
+
+### Python
 
 ### JavaScript
 
@@ -289,9 +316,3 @@ Syntax Theme: Atom Dark or One Dark
 - [https://gyrosco.pe/](https://gyrosco.pe/)
 
     首页的卡片翻动效果非常赞。
-
-<!--
-## Comments
-
-{% include comments.html %}
--->
