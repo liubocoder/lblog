@@ -3,10 +3,10 @@
   <channel>
     <title>刘波的学习记录</title>
     <description></description>
-    <link>https://liubocode.gitee.io/</link>
-    <atom:link href="https://liubocode.gitee.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 04 Jun 2021 17:15:33 +0800</pubDate>
-    <lastBuildDate>Fri, 04 Jun 2021 17:15:33 +0800</lastBuildDate>
+    <link>http://localhost:4001/</link>
+    <atom:link href="http://localhost:4001/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Thu, 01 Jul 2021 10:36:23 +0800</pubDate>
+    <lastBuildDate>Thu, 01 Jul 2021 10:36:23 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -20,8 +20,8 @@
 这是一篇测试用的文章，主要测试博客中的一些功能是否正常
 </description>
         <pubDate>Mon, 31 May 2021 00:00:00 +0800</pubDate>
-        <link>https://liubocode.gitee.io/2021/05/31/hello-my-blog/</link>
-        <guid isPermaLink="true">https://liubocode.gitee.io/2021/05/31/hello-my-blog/</guid>
+        <link>http://localhost:4001/2021/05/31/hello-my-blog/</link>
+        <guid isPermaLink="true">http://localhost:4001/2021/05/31/hello-my-blog/</guid>
         
         <category>tag1</category>
         
