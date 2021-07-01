@@ -61,3 +61,7 @@ paginate: 6
 port: 4001
 
 destination: deploy
+
+sass:
+  sass_dir: _sass
+  style: compressed
