@@ -5,9 +5,79 @@
     <description></description>
     <link>http://localhost:4001/</link>
     <atom:link href="http://localhost:4001/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 01 Jul 2021 18:30:51 +0800</pubDate>
-    <lastBuildDate>Thu, 01 Jul 2021 18:30:51 +0800</lastBuildDate>
+    <pubDate>Fri, 02 Jul 2021 18:13:13 +0800</pubDate>
+    <lastBuildDate>Fri, 02 Jul 2021 18:13:13 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>java线程相关</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#锁&quot; id=&quot;markdown-toc-锁&quot;&gt;锁&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;锁&quot;&gt;锁&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    偏向锁/轻量级锁/重量级锁
+是指synchronized锁状态，描述在对象头部Mark Word（可以使用库jol-core，ClassLayout.parseInstance()方法查看）
+  &lt;/li&gt;
+  &lt;li&gt;
+    可重入锁/非可重入锁
+可重入锁代表ReentrantLock，reentrant意思是‘再次进入’
+  &lt;/li&gt;
+  &lt;li&gt;
+    共享锁/独占锁
+ReadWritLock
+  &lt;/li&gt;
+  &lt;li&gt;
+    公平锁/非公平锁
+synchronized 是非公平锁，ReentrantLock通过带参构造公平锁
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Fri, 02 Jul 2021 00:00:00 +0800</pubDate>
+        <link>http://localhost:4001/2021/07/02/java-thread/</link>
+        <guid isPermaLink="true">http://localhost:4001/2021/07/02/java-thread/</guid>
+        
+        <category>thread</category>
+        
+        <category>threadlock</category>
+        
+        
+        <category>java</category>
+        
+      </item>
+    
+      <item>
+        <title>数据库基础</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#参考资料&quot; id=&quot;markdown-toc-参考资料&quot;&gt;参考资料&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;参考资料&quot;&gt;参考资料&lt;/h2&gt;
+mysql常用基本指令
+&lt;a href=&quot;https://blog.csdn.net/weixin_42368489/article/details/82813893&quot;&gt;https://blog.csdn.net/weixin_42368489/article/details/82813893&lt;/a&gt;
+
+服务器相关资料
+&lt;a href=&quot;https://www.pomit.cn/index.html&quot;&gt;https://www.pomit.cn/index.html&lt;/a&gt;
+
+mysql与postgreSql比较
+&lt;a href=&quot;https://www.biaodianfu.com/mysql-vs-postgresql.html&quot;&gt;https://www.biaodianfu.com/mysql-vs-postgresql.html&lt;/a&gt;
+
+数据库的博客
+&lt;a href=&quot;https://tonydong.blog.csdn.net&quot;&gt;https://tonydong.blog.csdn.net&lt;/a&gt;
+</description>
+        <pubDate>Fri, 02 Jul 2021 00:00:00 +0800</pubDate>
+        <link>http://localhost:4001/2021/07/02/db-base/</link>
+        <guid isPermaLink="true">http://localhost:4001/2021/07/02/db-base/</guid>
+        
+        <category>Db基础</category>
+        
+        
+        <category>Database</category>
+        
+      </item>
     
       <item>
         <title>Bazel构建工具</title>
@@ -17,7 +87,7 @@
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
-Bazel是Google开源的构建工具，原生支持java、C++的编译，开源社区也有支持其他语言的编译的rule。本文根据ONOS2.6.0版本使用bazel编译过程来学习下bazel工具。
+Bazel是Google开源的构建工具，原生支持java、C++的编译，开源社区也有支持其他语言的编译的rule。本文结合了自身实践过程来学习bazel。
 
 &lt;h2 id=&quot;bazel安装&quot;&gt;Bazel安装&lt;/h2&gt;
 bazelisk 是bazel的版本管理工具，不同版本的onos使用了不同版本的bazel，因此我们在编译onos的时候bazelisk会自动下载对应版本的bazel进行编译。

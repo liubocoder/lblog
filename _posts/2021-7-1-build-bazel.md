@@ -12,8 +12,7 @@ typora-root-url: ..
 
 
 ## 前言
-Bazel是Google开源的构建工具，原生支持java、C++的编译，开源社区也有支持其他语言的编译的rule。本文根据ONOS2.6.0版本使用bazel编译过程来学习下bazel工具。
-
+Bazel是Google开源的构建工具，原生支持java、C++的编译，开源社区也有支持其他语言的编译的rule。本文结合了自身实践过程来学习bazel。
 
 ## Bazel安装
 bazelisk 是bazel的版本管理工具，不同版本的onos使用了不同版本的bazel，因此我们在编译onos的时候bazelisk会自动下载对应版本的bazel进行编译。

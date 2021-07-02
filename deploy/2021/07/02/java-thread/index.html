@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>关于</title>
-    <meta name="description" content="">
+    <title>java线程相关</title>
+    <meta name="description" content="  锁锁      偏向锁/轻量级锁/重量级锁是指synchronized锁状态，描述在对象头部Mark Word（可以使用库jol-core，ClassLayout.parseInstance()方法查看）        可重入锁/非可重入锁可重入锁代表ReentrantLock，reentrant意思是‘再次...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css">
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://localhost:4001/about/">
+    <link rel="canonical" href="http://localhost:4001/2021/07/02/java-thread/">
     <link rel="alternate" type="application/rss+xml" title="刘波的学习记录" href="http://localhost:4001/feed.xml ">
 
 
@@ -96,8 +96,8 @@
                     
                     <li>
                         
-                        <a class="active" href="/about/">
-                            
+                        <a href="/about/">
+                        
                             <i class="fa fa-heart"></i>关于
                         </a>
                     </li>
@@ -127,21 +127,200 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>关于</h1>
+        <h1>java线程相关</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2021-07-02
+            </div>
+
+            <div class="label-card">
+                <i class="fa fa-user"></i>liubo
+                
+            </div>
+            <div class="label-card">
+                <p><i class="fa fa-eye fa-x"></i><span id="busuanzi_value_page_pv"></span></p>
+            </div>
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#java" title="Category: java" rel="category">java</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/tag/#thread" title="Tag: thread" rel="tag">thread</a-->
+        <a href="/tag/#thread" title="Tag: thread" rel="tag">thread</a>&nbsp;
+    
+        <!--a href="/tag/#threadlock" title="Tag: threadlock" rel="tag">threadlock</a-->
+        <a href="/tag/#threadlock" title="Tag: threadlock" rel="tag">threadlock</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
         <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#关于我" id="markdown-toc-关于我">关于我</a></li>
+  <li><a href="#锁" id="markdown-toc-锁">锁</a></li>
+  <li><a href="#java-等待一个线程结束的方案" id="markdown-toc-java-等待一个线程结束的方案">java 等待一个线程结束的方案</a></li>
 </ul>
 
-<h2 id="关于我">关于我</h2>
+<h2 id="锁">锁</h2>
 
-<p>目前我从事Android研发，公司App项目主程</p>
+<ol>
+  <li>
+    <p>偏向锁/轻量级锁/重量级锁
+是指synchronized锁状态，描述在对象头部Mark Word（可以使用库jol-core，ClassLayout.parseInstance()方法查看）</p>
+  </li>
+  <li>
+    <p>可重入锁/非可重入锁
+可重入锁代表ReentrantLock，reentrant意思是‘再次进入’</p>
+  </li>
+  <li>
+    <p>共享锁/独占锁
+ReadWritLock</p>
+  </li>
+  <li>
+    <p>公平锁/非公平锁
+synchronized 是非公平锁，ReentrantLock通过带参构造公平锁</p>
+  </li>
+  <li>
+    <p>悲观锁/乐观锁
+悲观锁是假定每次获取数据都认为数据会被更改，因此在操作数据前必须要拿到锁，而乐观锁在获取资源前不要求锁住资源，而利用CAS在不独占资源情况下更改资源。</p>
+  </li>
+  <li>
+    <p>自旋锁/非自旋锁
+自旋是陷入循环</p>
+  </li>
+  <li>
+    <p>可中断锁/不可中断锁
+使用ReentrantLock.lockInterruptibly()获取锁的过程是可被中断</p>
+  </li>
+</ol>
 
-<p>偶尔搞下服务器的开发：后端java、前端vue</p>
+<h2 id="java-等待一个线程结束的方案">java 等待一个线程结束的方案</h2>
 
-<p>最近研究SDN：控制器使用ONOS</p>
+<ol>
+  <li>
+    <p>while循环</p>
+  </li>
+  <li>
+    <p>Object的wait/notify方法</p>
+  </li>
+  <li>
+    <p>使用锁</p>
+  </li>
+  <li>
+    <p>其他封装方法 如：CountDownLatch、CyclicBarrier、Thread.join()、Future等等，都是直接或间接使用锁或wait/notify机制</p>
+  </li>
+</ol>
 
-<p>主要编程语言：JAVA、C、JS+CSS+HTML</p>
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/2021/07/02/db-base/">数据库基础</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+    </div>
+</div>
+
+
 
     </div>
     <button class="anchor"><i class="fa fa-anchor"></i></button>
@@ -154,13 +333,25 @@
                     Content
                 </div>
                 <ul id="content-side" class="content-ul">
-                </ul>
+                    
+                    <li><a href="#comments">Comments</a></li>                </ul>
             </div>
             <!-- 其他div框放到这里 -->
             <!-- <div class="side">bbbb</div> -->
         </div>
     </div>
 </div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+}());
+</script>
 <script src="/js/pageContent.js " charset="utf-8"></script>
 
 
