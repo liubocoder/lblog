@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Bazel构建工具</title>
+    <meta name="description" content="  前言  Bazel安装前言Bazel是Google开源的构建工具，原生支持java、C++的编译，开源社区也有支持其他语言的编译的rule。本文根据ONOS2.6.0版本使用bazel编译过程来学习下bazel工具。Bazel安装bazelisk 是bazel的版本管理工具，不同版本的onos使用了不同版本的...">
+
+    <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css">
+    <link rel="stylesheet" href="/css/main.css ">
+    <link rel="canonical" href="http://localhost:4001/2021/07/01/build-bazel/">
+    <link rel="alternate" type="application/rss+xml" title="刘波的学习记录" href="http://localhost:4001/feed.xml ">
+
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?b659da8ed4e65e6090d2d6a718d56b8f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+
+
+
+</head>
+
+
+  <body>
+
+    <header id="top">
+    <div class="wrapper">
+        <a href="/" class="brand">刘波的学习记录</a>
+        <small>Java Android C Coder</small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+                <li>
+                    
+                    <a href="/">
+                    
+                        <i class="fa fa-home"></i>主页
+                    </a>
+                </li>
+
+                
+                    
+                    <li>
+                        
+                        <a href="/archive/">
+                        
+                            <i class="fa fa-archive"></i>归档
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/category/">
+                        
+                            <i class="fa fa-th-list"></i>分类
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/tag/">
+                        
+                            <i class="fa fa-tags"></i>标签
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/collection/">
+                        
+                            <i class="fa fa-bookmark"></i>收藏
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/about/">
+                        
+                            <i class="fa fa-heart"></i>关于
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/testtitle/">
+                        
+                            <i class="fa fa-ignore"></i>保留
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>Bazel构建工具</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2021-07-01
+            </div>
+
+            <div class="label-card">
+                <i class="fa fa-user"></i>liubo
+                
+            </div>
+            <div class="label-card">
+                <p><i class="fa fa-eye fa-x"></i><span id="busuanzi_value_page_pv"></span></p>
+            </div>
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Build" title="Category: Build" rel="category">Build</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/tag/#Bazel" title="Tag: Bazel" rel="tag">Bazel</a-->
+        <a href="/tag/#Bazel" title="Tag: Bazel" rel="tag">Bazel</a>&nbsp;
+    
+        <!--a href="/tag/#Onos" title="Tag: Onos" rel="tag">Onos</a-->
+        <a href="/tag/#Onos" title="Tag: Onos" rel="tag">Onos</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#bazel安装" id="markdown-toc-bazel安装">Bazel安装</a></li>
+  <li><a href="#bazel介绍" id="markdown-toc-bazel介绍">Bazel介绍</a>    <ul>
+      <li><a href="#build" id="markdown-toc-build">BUILD</a></li>
+      <li><a href="#依赖" id="markdown-toc-依赖">依赖</a></li>
+      <li><a href="#package" id="markdown-toc-package">Package</a></li>
+      <li><a href="#target" id="markdown-toc-target">Target</a></li>
+      <li><a href="#dag依赖图" id="markdown-toc-dag依赖图">DAG依赖图</a></li>
+      <li><a href="#宏函数" id="markdown-toc-宏函数">宏函数</a></li>
+      <li><a href="#remote-cache" id="markdown-toc-remote-cache">Remote Cache</a></li>
+    </ul>
+  </li>
+  <li><a href="#参考资料" id="markdown-toc-参考资料">参考资料</a></li>
+</ul>
+
+<h2 id="前言">前言</h2>
+<p>Bazel是Google开源的构建工具，原生支持java、C++的编译，开源社区也有支持其他语言的编译的rule。本文根据ONOS2.6.0版本使用bazel编译过程来学习下bazel工具。</p>
+
+<h2 id="bazel安装">Bazel安装</h2>
+<p>bazelisk 是bazel的版本管理工具，不同版本的onos使用了不同版本的bazel，因此我们在编译onos的时候bazelisk会自动下载对应版本的bazel进行编译。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://github.com/bazelbuild/bazelisk/releases/download/v1.4.0/bazelisk-linux-amd64
+</code></pre></div></div>
+
+<p><img src="/assets/blog-img/build-bazel-1-1.png" alt="img" /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod +x bazelisk-linux-amd64
+sudo mv bazelisk-linux-amd64 /usr/local/bin/bazel
+</code></pre></div></div>
+
+<p><img src="/assets/blog-img/build-bazel-1-2.png" alt="img" /></p>
+
+<p>安装gcc</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt install gcc
+sudo apt install g++
+</code></pre></div></div>
+<p>当然也可使用各个linux版本各自的包管理器来安装，例如Ubuntu</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt install bazel
+</code></pre></div></div>
+
+<h2 id="bazel介绍">Bazel介绍</h2>
+
+<p>bazel以target作为构建的最小单元。一个项目里面必须要包含WORKSPACE文件，一个源码包下需要有BUILD文件来定义target（这两类文件都可以加个后缀.bazel，也能被识别）</p>
+
+<p>先看一个测试工程</p>
+
+<p><img src="/assets/blog-img/build-bazel-2-1.png" alt="img" /></p>
+
+<p>FuncInterface是一个接口，FuncImpl实现该结构，MainTest包含main函数，调用FuncImpl的实现方法。</p>
+
+<p>BUILD</p>
+
+<p><img src="/assets/blog-img/build-bazel-2-2.png" alt="img" /></p>
+
+<p>WORKSPACE为一个空文件</p>
+
+<p>demo中的BUILD文件定义了一个java_binary类型的target</p>
+
+<blockquote>
+  <ul>
+    <li>load：引入rule，bazel需要知道源码具体是如何编译，是通过rule完成</li>
+    <li>name：每一个target都有一个name，用于在其他地方被引用</li>
+    <li>src：需要编译的源文件</li>
+    <li>main_class：main函数class</li>
+    <li>glob：该函数是使用shell模式的通配符进行匹配</li>
+  </ul>
+</blockquote>
+
+<p>执行编译<code class="language-plaintext highlighter-rouge">bazel build :MyBinary</code></p>
+
+<p><img src="/assets/blog-img/build-bazel-2-3.png" alt="img" /></p>
+
+<p>执行<code class="language-plaintext highlighter-rouge">bazel run :MyBinary</code>即可执行编译的main函数。</p>
+
+<h3 id="build">BUILD</h3>
+
+<p>Bazel一个workspace下包含0到多个package，每个package包含0或多个target；其中target包括file、rule、packagegroup三种类型。</p>
+
+<p><img src="/assets/blog-img/build-bazel-2-4.png" alt="img" /></p>
+
+<p>工作区：Workspace
+在项目跟路径下需要创建WORKSPACE(或WORKSPACE.bzl)文件，bazel在构建过程中创建一个隔离的工作区，用于标示项目的起始位置。</p>
+
+<p>项目的源文件、构建过程的生成文件、及其所有外部依赖都归属该工作区。</p>
+
+<p>WORKSPACE文件用于声明项目名称，及其该项目的外部依赖，如果项目不存在外部依赖，该文件内容可以为空（但不能没有文件）。</p>
+
+<p>工作区作为隔离区，可以隔离不同版本的依赖。</p>
+
+<h3 id="依赖">依赖</h3>
+
+<p>本地依赖是@来标示，通常是可以省略，外部依赖是通过@name来标示，name是外部依赖的名称，这里测试下依赖远端仓库的jar包，修改WORKSPACE文件</p>
+
+<p><img src="/assets/blog-img/build-bazel-2-5.png" alt="img" /></p>
+
+<p>参数license_types是license-type字符串的一个列表，有效的license types包括：restricted、reciprocal、notice、permissive、unencumbered</p>
+
+<p>在BUILD中添加deps，填写依赖关系，在代码中使用fastjson</p>
+
+<p><img src="/assets/blog-img/build-bazel-2-6.png" alt="img" /></p>
+
+<p>执行编译</p>
+
+<p><img src="/assets/blog-img/build-bazel-2-7.png" alt="img" /></p>
+
+<p>外部依赖还可以通过其他方式引入：http_repository、new_http_repository等</p>
+
+<h3 id="package">Package</h3>
+<p>含有BUILD的目录即为一个包，是一个独立的存在，如果一个目录不存在BUILD，那么属于父目录的BUILD包范围，BUILD决定包的范围。</p>
+
+<p>包名是起始于BUILD文件所在的目录。</p>
+
+<p>包集合标示一组包，由package_group定义。使用包集合，可以很方便的将某个规则和可见性一并赋予给包集合，使得该包集合所包含的包都可以访问该规则。</p>
+
+<h3 id="target">Target</h3>
+<p>一般target是包含文件（File）、规则（rule）、包集合（package group）三种基本类型</p>
+
+<blockquote>
+  <ul>
+    <li>文件：源文件和派生文件</li>
+    <li>规则：规则是由输入、输出、动作组成，动作一般是隐式的，比如java_library无需显示指定javac -jar</li>
+    <li>规则输入：源文件、也可是规则通过deps表示</li>
+  </ul>
+</blockquote>
+
+<p>目标名称被称之为标签，标签是由三个部分组成</p>
+
+<p><img src="/assets/blog-img/build-bazel-2-8.png" alt="img" /></p>
+
+<p>前两部分在很多场景下都是省略了，前面执行的<code class="language-plaintext highlighter-rouge">bazel run :MyBinary</code>也可以写成<code class="language-plaintext highlighter-rouge">bazel run @//:MyBinary</code>。</p>
+
+<h3 id="dag依赖图">DAG依赖图</h3>
+<p>我们将demo修改一下：mybin依赖mylib</p>
+
+<p>使用如下指令查看依赖图</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xdot &lt;(bazel query --nohost_deps --noimplicit_deps 'deps(//mybin:mybin)' --output graph)
+</code></pre></div></div>
+
+<p><img src="/assets/blog-img/build-bazel-2-9.png" alt="img" /></p>
+
+<p><img src="/assets/blog-img/build-bazel-2-10.png" alt="img" /></p>
+
+<h3 id="宏函数">宏函数</h3>
+<p>bazel提供了灵活的扩展机制，用于自定义宏函数，</p>
+
+<p><img src="/assets/blog-img/build-bazel-2-11.png" alt="img" /></p>
+
+<p>这里相当于执行了ls -l BUILD &gt; fout
+而输出文件fout是在bazel-out/k8-fastbuild/bin/fout</p>
+
+<p><img src="/assets/blog-img/build-bazel-2-12.png" alt="img" /></p>
+
+<p>还通过def关键字定义一个公共的宏函数</p>
+
+<p><img src="/assets/blog-img/build-bazel-2-13.png" alt="img" /></p>
+
+<p>这个宏函数需要定义在.bzl 文件中，我这里创建了一个tool/printer.bzl，在需要使用的地方使用load函数加载，构建自己的宏函数</p>
+
+<p><img src="/assets/blog-img/build-bazel-2-14.png" alt="img" /></p>
+
+<p>再次执行自定义rule生成的target</p>
+
+<p><img src="/assets/blog-img/build-bazel-2-15.png" alt="img" /></p>
+
+<h3 id="remote-cache">Remote Cache</h3>
+<p>bazel比较重要的一个特性就是支持远端缓存</p>
+
+<p>要能够缓存Bazel每个action的输出，我们就要一个server来实现remote cache，用于存储action的输出。这些输出实际上是一堆文件对应的hash值。</p>
+
+<p>总体来说，我们需要满足三个前提：</p>
+<ul>
+  <li>设置一个server作为cache backend</li>
+  <li>配置Bazel build去使用cache</li>
+  <li>Bazel版本要在0.10.0以上</li>
+</ul>
+
+<p>bazel的缓存服务器三种方式实现：</p>
+<ul>
+  <li>NGINX的WebDAV模块</li>
+  <li>开源的bazel-remote</li>
+  <li>Google Cloud Storage</li>
+</ul>
+
+<p>我们选择开源的方案，直接使用docker来完成。先下载docker镜像：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker pull buchgr/bazel-remote-cache
+</code></pre></div></div>
+<p><img src="/assets/blog-img/build-bazel-2-16.png" alt="img" /></p>
+
+<p>创建一个cache目录，并将权限修改成777</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir cache; chmod 777 -R cache
+</code></pre></div></div>
+
+<p>再执行docker容器创建指令</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>path=`pwd`;docker run -v $path/cache:/data -p 9090:8080 -p 9092:9092 buchgr/bazel-remote-cache
+</code></pre></div></div>
+<p><img src="/assets/blog-img/build-bazel-2-17.png" alt="img" /></p>
+
+<p>在本地测试远端服务器状态
+<img src="/assets/blog-img/build-bazel-2-18.png" alt="img" /></p>
+
+<p>本地编译的时候加如下参数</p>
+
+<p><code class="language-plaintext highlighter-rouge">--remote_cache=http://replace-with-your.host:port</code></p>
+
+<p>添加认证信息</p>
+
+<p><code class="language-plaintext highlighter-rouge">--remote_cache=http://user:pass@replace-with-your.host:port</code></p>
+
+<p>若不想使用远端cache，可以在构建时指定参数，或在target中指定no-cache参数：</p>
+
+<p><code class="language-plaintext highlighter-rouge">build --remote_upload_local_results=false</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java_library(
+    name = "target",
+    tags = ["no-cache"]
+)
+</code></pre></div></div>
+
+<p>编译后再次查看远端服务器状态，已经产生一些缓存</p>
+
+<p><img src="/assets/blog-img/build-bazel-2-19.png" alt="img" /></p>
+
+<h2 id="参考资料">参考资料</h2>
+
+<p><a href="https://www.jianshu.com/p/3a4a2b5f46de">https://www.jianshu.com/p/3a4a2b5f46de</a></p>
+
+<p><a href="https://www.zhihu.com/people/thewarrior/posts">https://www.zhihu.com/people/thewarrior/posts</a></p>
+
+<p><a href="https://docs.bazel.build/versions/4.0.0/bazel-overview.html">https://docs.bazel.build/versions/4.0.0/bazel-overview.html</a></p>
+
+<p><a href="https://github.com/buchgr/bazel-remote">https://github.com/buchgr/bazel-remote</a></p>
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/2021/07/01/blog-create/">创建一个属于自己的博客</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+    </div>
+</div>
+
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    Content
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#comments">Comments</a></li>                </ul>
+            </div>
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+
+        <p class="description">
+             刘波的个人博客 
+        </p>
+        <p class="contact">
+            Contact me at: 
+            <a href="https://github.com/liubo11" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
+            <a href="mailto:liubo233@qq.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
+        </p>
+        <p>
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        </p>
+        <p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> & <a href="https://gitee.com" target="_blank">Gitee Pages</a>.
+            </span>
+            <span>
+                Theme designed by <a>HyG</a>.
+            </span>
+        </p>
+    </div>
+</footer>
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src=" /js/main.js " charset="utf-8"></script>
+    <script src=" /js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+    </script>
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>
