@@ -5,12 +5,51 @@
     <description></description>
     <link>http://localhost:4001/</link>
     <atom:link href="http://localhost:4001/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 02 Jul 2021 18:13:13 +0800</pubDate>
-    <lastBuildDate>Fri, 02 Jul 2021 18:13:13 +0800</lastBuildDate>
+    <pubDate>Thu, 08 Jul 2021 18:45:42 +0800</pubDate>
+    <lastBuildDate>Thu, 08 Jul 2021 18:45:42 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
-        <title>java线程相关</title>
+        <title>Netty框架</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#前言&quot; id=&quot;markdown-toc-前言&quot;&gt;前言&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+在讨论Netty之前需要了解下我们处理网络请求的方案
+
+&lt;ol&gt;
+  &lt;li&gt;
+    BIO
+同步阻塞，服务器调用accept阻塞等待请求，当请求到来时创建线程处理，主线程继续等待请求。
+  &lt;/li&gt;
+  &lt;li&gt;
+    NIO
+异步非阻塞，ServerSocketChannel非阻塞模式，使用selector轮询各类事件。
+  &lt;/li&gt;
+  &lt;li&gt;
+    AIO
+只需要关心buffer的读写事件
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+上述方案使用原生API直接开发，流程比较繁琐，性能不好，并且容易出错，使用Netty可以简化流程，Netty中使用Handler串行执行，结构层次分明，逻辑清晰，并且一个客户端只注册在一个线程上，避免部分业务中出现并发问题。
+</description>
+        <pubDate>Thu, 08 Jul 2021 00:00:00 +0800</pubDate>
+        <link>http://localhost:4001/2021/07/08/netty-use/</link>
+        <guid isPermaLink="true">http://localhost:4001/2021/07/08/netty-use/</guid>
+        
+        <category>netty</category>
+        
+        <category>socket</category>
+        
+        
+        <category>java</category>
+        
+      </item>
+    
+      <item>
+        <title>Java线程相关</title>
         <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#锁&quot; id=&quot;markdown-toc-锁&quot;&gt;锁&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -113,6 +152,7 @@ bazelisk 是bazel的版本管理工具，不同版本的onos使用了不同版�
         <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#前言&quot; id=&quot;markdown-toc-前言&quot;&gt;前言&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#遇到的问题&quot; id=&quot;markdown-toc-遇到的问题&quot;&gt;遇到的问题&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#参考资料&quot; id=&quot;markdown-toc-参考资料&quot;&gt;参考资料&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
@@ -139,6 +179,10 @@ bazelisk 是bazel的版本管理工具，不同版本的onos使用了不同版�
 在&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt;中使用excerpt_separator来标记的，在本项目中使用的是四个连续空行
   &lt;/li&gt;
 &lt;/ol&gt;
+
+&lt;h2 id=&quot;参考资料&quot;&gt;参考资料&lt;/h2&gt;
+
+&lt;a href=&quot;https://pandao.github.io/editor.md/&quot;&gt;MarkDown编辑器&lt;/a&gt;
 </description>
         <pubDate>Thu, 01 Jul 2021 00:00:00 +0800</pubDate>
         <link>http://localhost:4001/2021/07/01/blog-create/</link>

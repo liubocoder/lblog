@@ -28,3 +28,7 @@ typora-root-url: ..
 
 4. 文档摘要
 在`_config.yml`中使用excerpt_separator来标记的，在本项目中使用的是四个连续空行
+
+## 参考资料
+
+[MarkDown编辑器](https://pandao.github.io/editor.md/)

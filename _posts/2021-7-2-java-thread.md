@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "java线程相关"
+title:  "Java线程相关"
 categories: java
 tags:  thread threadlock
 author: liubo

@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>创建一个属于自己的博客</title>
-    <meta name="description" content="  前言  遇到的问题  参考资料前言很多人可能都有一种想法，写点东西记录下学习或生活，好记忆不如烂笔头，现在我们用博客来开启文字记忆。需要使用到的资源有：GiteePages，jekyll，Theme，主题是一个大牛开源的，只需要根据他的中文文档配置，基本可以完成搭建。遇到的问题      不蒜子的域名过期根据...">
+    <title>Netty框架</title>
+    <meta name="description" content="  前言前言在讨论Netty之前需要了解下我们处理网络请求的方案      BIO同步阻塞，服务器调用accept阻塞等待请求，当请求到来时创建线程处理，主线程继续等待请求。        NIO异步非阻塞，ServerSocketChannel非阻塞模式，使用selector轮询各类事件。        AIO...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css">
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://localhost:4001/2021/07/01/blog-create/">
+    <link rel="canonical" href="http://localhost:4001/2021/07/08/netty-use/">
     <link rel="alternate" type="application/rss+xml" title="刘波的学习记录" href="http://localhost:4001/feed.xml ">
 
 
@@ -127,11 +127,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>创建一个属于自己的博客</h1>
+        <h1>Netty框架</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2021-07-01
+                <i class="fa fa-calendar"></i>2021-07-08
             </div>
 
             <div class="label-card">
@@ -154,7 +154,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Blog" title="Category: Blog" rel="category">Blog</a>
+        <a href="/category/#java" title="Category: java" rel="category">java</a>
     
   
 
@@ -171,11 +171,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Blog" title="Tag: Blog" rel="tag">Blog</a-->
-        <a href="/tag/#Blog" title="Tag: Blog" rel="tag">Blog</a>&nbsp;
+        <!--a href="/tag/#netty" title="Tag: netty" rel="tag">netty</a-->
+        <a href="/tag/#netty" title="Tag: netty" rel="tag">netty</a>&nbsp;
     
-        <!--a href="/tag/#Markdown" title="Tag: Markdown" rel="tag">Markdown</a-->
-        <a href="/tag/#Markdown" title="Tag: Markdown" rel="tag">Markdown</a>
+        <!--a href="/tag/#socket" title="Tag: socket" rel="tag">socket</a-->
+        <a href="/tag/#socket" title="Tag: socket" rel="tag">socket</a>
     
   
 
@@ -188,38 +188,154 @@
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
   <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
-  <li><a href="#遇到的问题" id="markdown-toc-遇到的问题">遇到的问题</a></li>
+  <li><a href="#使用" id="markdown-toc-使用">使用</a>    <ul>
+      <li><a href="#serverbootstrapbootstrap" id="markdown-toc-serverbootstrapbootstrap">ServerBootstrap/Bootstrap</a></li>
+      <li><a href="#eventloopgroup" id="markdown-toc-eventloopgroup">EventLoopGroup</a></li>
+      <li><a href="#channelhandler" id="markdown-toc-channelhandler">ChannelHandler</a>        <ul>
+          <li><a href="#自定义handler" id="markdown-toc-自定义handler">自定义handler</a></li>
+        </ul>
+      </li>
+      <li><a href="#channeloption常用配置" id="markdown-toc-channeloption常用配置">ChannelOption常用配置</a></li>
+    </ul>
+  </li>
   <li><a href="#参考资料" id="markdown-toc-参考资料">参考资料</a></li>
 </ul>
 
 <h2 id="前言">前言</h2>
-<p>很多人可能都有一种想法，写点东西记录下学习或生活，好记忆不如烂笔头，现在我们用博客来开启文字记忆。</p>
+<p>在讨论Netty之前需要了解下我们处理网络请求的方案</p>
 
-<p>需要使用到的资源有：<a href="https://gitee.com/help/articles/4136">GiteePages</a>，<a href="http://jekyllcn.com/docs/">jekyll</a>，<a href="https://github.com/xudailong/xudailong.github.io">Theme</a>，主题是一个大牛开源的，只需要根据他的<a href="https://github.com/liubo11/xudailong.github.io/blob/master/README-zh-cn.md">中文文档</a>配置，基本可以完成搭建。</p>
-
-<h2 id="遇到的问题">遇到的问题</h2>
 <ol>
   <li>
-    <p>不蒜子的域名过期
-根据<a href="http://ibruce.info/2015/04/04/busuanzi/">不蒜子网站</a>说明更改即可。</p>
+    <p>BIO
+同步阻塞，服务器调用accept阻塞等待请求，当请求到来时创建线程处理，主线程继续等待请求。</p>
   </li>
   <li>
-    <p>百度统计
-需要在<a href="https://tongji.baidu.com/web/welcome/products">百度统计官网</a>注册，更改_config.yml文件的配置，需要注意的是若网站1个月没有流量，可能失效。</p>
+    <p>NIO
+异步非阻塞，ServerSocketChannel非阻塞模式，使用selector轮询各类事件。</p>
   </li>
   <li>
-    <p>文档撰写
-文档存放在_posts目录，使用Markdown语言编写，可参考<a href="https://www.runoob.com/markdown/md-tutorial.html">RUNOOB</a>的教程。</p>
+    <p>AIO
+只需要关心buffer的读写事件</p>
+  </li>
+</ol>
+
+<p>上述方案使用原生API直接开发，流程比较繁琐，性能不好，并且容易出错，使用Netty可以简化流程，Netty中使用Handler串行执行，结构层次分明，逻辑清晰，并且一个客户端只注册在一个线程上，避免部分业务中出现并发问题。</p>
+
+<h2 id="使用">使用</h2>
+
+<p>ServerBootstrap/Bootstrap EventLoopGroup ChannelHandler</p>
+
+<h3 id="serverbootstrapbootstrap">ServerBootstrap/Bootstrap</h3>
+
+<p>其中ServerBootstrap主要是用于服务器端，可以配置两个EventLoopGroup，分别用于接收请求和处理请求形象比喻boss-worker概念</p>
+
+<h3 id="eventloopgroup">EventLoopGroup</h3>
+
+<p>使用某种IO复用策略的线程池，常用EpollEventLoopGroup、NioEventLoopGroup</p>
+
+<h3 id="channelhandler">ChannelHandler</h3>
+
+<p>ChannelHandler是实现业务中最重要的环节，常见的类型有：ChannelInboundHandler、ChannelOutboundhandler、ChannelDuplexHandler。</p>
+
+<p>网络事件到来时，ChannelInboundHandler处理接收数据，ChannelOutboundhandler处理发送数据，而ChannelDuplexHandler两者都会处理</p>
+
+<p><img src="/assets/blog-img/netty-use-1-1.png" alt="img" /></p>
+
+<p><a href="https://zhuanlan.zhihu.com/p/68061038">图片出处</a></p>
+
+<p>业务中我们主要是和Handler打交道，常用Handler有</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">SslHandler</code> 支持ssl传输加密</li>
+  <li><code class="language-plaintext highlighter-rouge">IdleStateHandler</code> 支持超时检查，可用于实现长连接，包括read、write、all</li>
+  <li>
+    <p>用于解决TCP粘包问题</p>
+
+    <blockquote>
+      <p><code class="language-plaintext highlighter-rouge">DelimiterBasedFrameDecoder</code> 分隔符解码器<br />
+ <code class="language-plaintext highlighter-rouge">LineBasedFrameDecoder</code>  回车换行解码器<br />
+ <code class="language-plaintext highlighter-rouge">FixedLengthFrameDecoder</code> 固定长度解码器<br />
+ <code class="language-plaintext highlighter-rouge">LengthFieldBasedFrameDecoder</code> 用于标识消息体或者整包消息的长度，解决’读半包’</p>
+    </blockquote>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">FlushConsolidationHandler</code> 内置的flush优化器</li>
+  <li>
+    <p>其他Handler</p>
+
+    <blockquote>
+      <p><code class="language-plaintext highlighter-rouge">LogginHandler</code> 日志打印<br />
+ <code class="language-plaintext highlighter-rouge">StringEncoder</code>、<code class="language-plaintext highlighter-rouge">StringDecoder</code>、<code class="language-plaintext highlighter-rouge">ByteToMessageDecoder</code>、<code class="language-plaintext highlighter-rouge">DatagramPckagetDecoder</code>等等</p>
+    </blockquote>
+  </li>
+</ol>
+
+<h4 id="自定义handler">自定义handler</h4>
+<p>一般从ByteToMessageDecoder、ChannelOutboundHandlerAdapter、ChannelInboundHandlerAdapter等这类开始继承实现相关自定义业务。</p>
+
+<h3 id="channeloption常用配置">ChannelOption常用配置</h3>
+
+<ol>
+  <li>
+    <p>SO_KEEPALIVE</p>
+
+    <blockquote>
+      <p>是否保持长连接状态<br />
+ 默认false，表示关闭长连接</p>
+    </blockquote>
   </li>
   <li>
-    <p>文档摘要
-在<code class="language-plaintext highlighter-rouge">_config.yml</code>中使用excerpt_separator来标记的，在本项目中使用的是四个连续空行</p>
+    <p>TCP_NODELAY</p>
+
+    <blockquote>
+      <p>是否禁用Nagle算法。Nagel算法将小的碎片数据连接成更大的报文来最小化所发送的报文的数量，如果需要发送一些较小的报文，则需要禁用该算法，从而最小化报文传输延时<br />
+ 默认false，表示启用了该算法</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>SO_REUSEADDR</p>
+
+    <blockquote>
+      <p>是否复用处于TIME_WAIT状态连接的端口，适用于有大量处于TIME_WAIT状态连接的场景，如高并发量的Http短连接场景等<br />
+ 默认false，默认不复用</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>SO_LINGER</p>
+
+    <blockquote>
+      <p>关闭Socket的延迟时间，socket.close() 方法调用后立即返回<br />
+ 默认-1，表示禁用该功能</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>SO_SNDBUF</p>
+
+    <blockquote>
+      <p>TCP发送缓存容量最大值，即TCP发送滑动窗口，使用<code class="language-plaintext highlighter-rouge">cat /proc/sys/net/ipv4/tcp_smem</code>查询其大小<br />
+ 常用计算公式 缓冲区大小 = 网络带宽 * 网络时延</p>
+    </blockquote>
+  </li>
+  <li>SO_RCVBUF
+    <blockquote>
+      <p>TCP接收缓存容量最大值<br />
+ 常用计算公式 缓冲区大小 = 网络带宽 * 网络时延</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>SO_BACKLOG</p>
+
+    <blockquote>
+      <p>对应的是tcp/ip协议, listen函数中的<code class="language-plaintext highlighter-rouge">backlog</code>参数，用来初始化服务端可连接队列。<br />
+ 如果backlog过小，就可能出现Accept的速度跟不上，A,B队列满了，就会导致客户端无法建立连接</p>
+    </blockquote>
   </li>
 </ol>
 
 <h2 id="参考资料">参考资料</h2>
 
-<p><a href="https://pandao.github.io/editor.md/">MarkDown编辑器</a></p>
+<p><a href="https://github.com/netty/netty.git">Netty代码地址</a></p>
+
+<p><a href="https://blog.csdn.net/qq_18603599/article/details/80768390">https://blog.csdn.net/qq_18603599/article/details/80768390</a></p>
 
         </article>
         <hr>
@@ -249,14 +365,14 @@
                     
                 
             
-                
-                    
-                
-                    
-                
-            
         
             
+            
+                
+                    
+                
+                    
+                
             
                 
                     
@@ -306,13 +422,11 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2021/05/31/hello-my-blog/">测试博客</a></p>
+        <p><strong>上一篇</strong> <a href="/2021/07/02/java-thread/">Java线程相关</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/2021/07/01/build-bazel/">Bazel构建工具</a></p>
         
     </div>
 </div>

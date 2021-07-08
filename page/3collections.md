@@ -10,6 +10,10 @@ type: page
 {:toc}
 
 ## 工具
+* [弱网测试工具介绍](https://www.cnblogs.com/jinjiangongzuoshi/p/5272787.html)
+
+    介绍了几款模拟恶劣网络环境的工具
+
 * [devdocs](https://devdocs.io/)
 
     查询各类编程语言、框架的API文档、测试等
