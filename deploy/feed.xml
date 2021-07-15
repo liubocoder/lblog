@@ -5,9 +5,231 @@
     <description></description>
     <link>http://localhost:4001/</link>
     <atom:link href="http://localhost:4001/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 08 Jul 2021 18:45:42 +0800</pubDate>
-    <lastBuildDate>Thu, 08 Jul 2021 18:45:42 +0800</lastBuildDate>
+    <pubDate>Thu, 15 Jul 2021 09:10:04 +0800</pubDate>
+    <lastBuildDate>Thu, 15 Jul 2021 09:10:04 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>ElementUI表单使用</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#前言&quot; id=&quot;markdown-toc-前言&quot;&gt;前言&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#1基本使用&quot; id=&quot;markdown-toc-1基本使用&quot;&gt;1.基本使用&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+最近业务中一个比较复杂表单，使用的是ElementUI，记录下表单的使用和遇到的问题
+
+&lt;h2 id=&quot;1基本使用&quot;&gt;1.基本使用&lt;/h2&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;el-form&amp;gt;
+    &amp;lt;el-form-item&amp;gt;
+    &amp;lt;/el-form-item&amp;gt;
+&amp;lt;/el-form&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+在el-form标签内部可以嵌套其他标签
+</description>
+        <pubDate>Wed, 14 Jul 2021 00:00:00 +0800</pubDate>
+        <link>http://localhost:4001/2021/07/14/web-vue-elui-form/</link>
+        <guid isPermaLink="true">http://localhost:4001/2021/07/14/web-vue-elui-form/</guid>
+        
+        <category>vue</category>
+        
+        <category>elementui</category>
+        
+        
+        <category>Web</category>
+        
+        <category>JavaScript</category>
+        
+      </item>
+    
+      <item>
+        <title>数字签名</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#概念&quot; id=&quot;markdown-toc-概念&quot;&gt;概念&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#存储&quot; id=&quot;markdown-toc-存储&quot;&gt;存储&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#证书&quot; id=&quot;markdown-toc-证书&quot;&gt;证书&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#ssl证书&quot; id=&quot;markdown-toc-ssl证书&quot;&gt;SSL证书&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#自签名证书&quot; id=&quot;markdown-toc-自签名证书&quot;&gt;自签名证书&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#ssl&quot; id=&quot;markdown-toc-ssl&quot;&gt;SSL&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#工具&quot; id=&quot;markdown-toc-工具&quot;&gt;工具&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#参考资料&quot; id=&quot;markdown-toc-参考资料&quot;&gt;参考资料&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;概念&quot;&gt;概念&lt;/h2&gt;
+数字签名又名公钥数字签名，基于非对称加密算法和数字摘要算法，具有三大特性：可认证性(authentication)、不可抵赖性(non-repudiation)和完整性(integrity)。
+
+首先我们考虑一个场景，客户端B在访问一个域名服务器S时要解决几个问题
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;保证数据的安全，不被窃听&lt;/li&gt;
+    &lt;li&gt;保证数据的完整，不被篡改&lt;/li&gt;
+    &lt;li&gt;保证服务器是合法的，可认证的&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+其中最主要的是保证服务器的合法性，其他的都可以在确保服务器合法后通过协商密钥加密传输数据来解决，而保证服务器合法性的根本是证书，证书的基础就是数字签名。
+
+当然证书是验证证书持有者的合法性，所以不仅能验证服务器也能验证客户端，银行的U盾就是验证客户端的合法性。
+
+数字签名的核心还是使用的是非对称加密算法的私钥对需要签名的数据进行加密处理。
+
+&lt;h2 id=&quot;存储&quot;&gt;存储&lt;/h2&gt;
+数字签名中牵扯到密钥、证书、密钥库的存储，密钥和证书一般都是使用ASN.1语法记录，存储格式可以是DER这类二进制文件，也可以是PEM这种经过Base64编码后的字符文件。
+
+常见证书文件后缀名有.cer、.crt、.rsa、.pem、.crs、.p7b等
+
+密钥库是包含公钥私钥和证书，其格式一般有JKS、JCEKS、PKCS#12等
+&lt;blockquote&gt;
+  JKS 扩展名.jks/.ks&lt;br /&gt;
+JCEKS 扩展名.jce&lt;br /&gt;
+PKCS#12 扩展名 .p12/.pfx
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;证书&quot;&gt;证书&lt;/h2&gt;
+国际通用x509标准来描述证书的基本结构，目前版本是v3，其规定证书有哪些字段，各自意义是什么，哪些是必要字段，哪些是可选字段。
+
+前面提到证书是私钥对另外一个公钥的签名，而签名的私钥对应的公钥证书谁来颁发呢，所以引入了CA的概念，系统默认CA的自签名证书是合法的证书，目前操作系统中基本都安装了受信任的证书列表。
+
+&lt;h3 id=&quot;ssl证书&quot;&gt;SSL证书&lt;/h3&gt;
+若需要支持https，则需要对域名申请ssl证书。阿里云上可注册免费域名，我随便注册了一个liuliu.work，申请免费的SSL证书，根据不同的服务器类型提供下载各类的密钥库文件或证书（证书都是一样的，只是保存证书的格式区别）。
+
+&lt;img src=&quot;/assets/blog-img/criptogram-digital-3-1.png&quot; alt=&quot;img&quot; /&gt;
+
+证书中的CN字段就是申请的二级域名。
+
+&lt;h3 id=&quot;自签名证书&quot;&gt;自签名证书&lt;/h3&gt;
+我们自己创建一个非对称加密密钥对，用私钥对公钥颁发证书，这个证书就是自签名证书，其实和CA颁发的证书一样，只是自签名证书没有在系统的受信任证书列表中。
+
+Android的APK中使用的就是自签名证书。
+
+在Chrome设置中搜索证书，打开系统的证书管理页面，在这里可以导入自己的证书或证书库
+
+&lt;img src=&quot;/assets/blog-img/criptogram-digital-3-2.png&quot; alt=&quot;img&quot; /&gt;
+
+&lt;h2 id=&quot;ssl&quot;&gt;SSL&lt;/h2&gt;
+
+&lt;h2 id=&quot;工具&quot;&gt;工具&lt;/h2&gt;
+
+&lt;h2 id=&quot;参考资料&quot;&gt;参考资料&lt;/h2&gt;
+
+&lt;a href=&quot;https://duanqz.github.io/2017-09-01-Android-Digital-Signature#13-%E4%BD%BF%E7%94%A8&quot;&gt;Android数字签名机制&lt;/a&gt;
+
+&lt;a href=&quot;https://www.iteye.com/blog/falchion-1472453&quot;&gt;PCKS标准&lt;/a&gt;
+
+&lt;a href=&quot;http://keystore-explorer.org/&quot;&gt;keystore工具&lt;/a&gt;
+
+&lt;a href=&quot;https://blog.csdn.net/zzhongcy/article/details/22755317&quot;&gt;https://blog.csdn.net/zzhongcy/article/details/22755317&lt;/a&gt;
+</description>
+        <pubDate>Wed, 14 Jul 2021 00:00:00 +0800</pubDate>
+        <link>http://localhost:4001/2021/07/14/criptogram-digital/</link>
+        <guid isPermaLink="true">http://localhost:4001/2021/07/14/criptogram-digital/</guid>
+        
+        <category>digital</category>
+        
+        
+        <category>加密算法</category>
+        
+      </item>
+    
+      <item>
+        <title>常见加密算法</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#前言&quot; id=&quot;markdown-toc-前言&quot;&gt;前言&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#对称加密算法&quot; id=&quot;markdown-toc-对称加密算法&quot;&gt;对称加密算法&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#des&quot; id=&quot;markdown-toc-des&quot;&gt;DES&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+在网络通信中，信息加密是最基本的信息安全策略
+
+&lt;h2 id=&quot;对称加密算法&quot;&gt;对称加密算法&lt;/h2&gt;
+其特点是加密和解密使用相同的密钥
+
+&lt;h3 id=&quot;des&quot;&gt;DES&lt;/h3&gt;
+DES : Data Encryption Standard，即数据加密标准，是一种使用密钥加密的块算法，1977年被美国联邦政府的国家标准局确定为联邦资料处理标准（FIPS），并授权在非密级政府通信中使用，随后该算法在国际上广泛流传开来。
+
+有个升级版本DES3，相当于进行3次数据加密。其安全性能不高，在我们的业务中很少使用。
+</description>
+        <pubDate>Mon, 12 Jul 2021 00:00:00 +0800</pubDate>
+        <link>http://localhost:4001/2021/07/12/criptogram/</link>
+        <guid isPermaLink="true">http://localhost:4001/2021/07/12/criptogram/</guid>
+        
+        
+        <category>加密算法</category>
+        
+      </item>
+    
+      <item>
+        <title>Juni和EasyMock的使用</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#前言&quot; id=&quot;markdown-toc-前言&quot;&gt;前言&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#参考资料&quot; id=&quot;markdown-toc-参考资料&quot;&gt;参考资料&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+自动化测试工具
+
+&lt;h2 id=&quot;参考资料&quot;&gt;参考资料&lt;/h2&gt;
+
+&lt;a href=&quot;https://blog.csdn.net/qq_41357569/article/details/85089818&quot;&gt;Juni和EasyMock配合使用&lt;/a&gt;
+</description>
+        <pubDate>Sat, 10 Jul 2021 00:00:00 +0800</pubDate>
+        <link>http://localhost:4001/2021/07/10/test-tool/</link>
+        <guid isPermaLink="true">http://localhost:4001/2021/07/10/test-tool/</guid>
+        
+        <category>JUnit</category>
+        
+        <category>EasyMock</category>
+        
+        <category>Maven</category>
+        
+        
+        <category>test</category>
+        
+        <category>java</category>
+        
+      </item>
+    
+      <item>
+        <title>jemalloc介绍</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#jemalloc基本信息&quot; id=&quot;markdown-toc-jemalloc基本信息&quot;&gt;jemalloc基本信息&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;jemalloc基本信息&quot;&gt;jemalloc基本信息&lt;/h2&gt;
+
+在学习Netty时，发现buffer引入缓冲池，其借用了jemalloc的思想；jemalloc在android5.1开始，成为libc默认的heap管理器。在这里搜索下jemalloc相关资料，以作记录。
+
+jemalloc使用一系列算法保证程序在申请和释放内存的高效稳定，主要有以下几个特点：
+
+&lt;ol&gt;
+  &lt;li&gt;
+    线程默认都有自己的私有缓存空间tcache，线程中分配内存都走这里，若未分配成功再走其他流程，线程内部的缓存空间中申请内存可以不加锁。
+  &lt;/li&gt;
+  &lt;li&gt;
+    内存区重新规划，使用不同大小的分配单元
+  &lt;/li&gt;
+  &lt;li&gt;
+    内存释放时，小内存合并为大内存，并判断是否需要缓存以供后续使用
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Fri, 09 Jul 2021 00:00:00 +0800</pubDate>
+        <link>http://localhost:4001/2021/07/09/jemalloc-use/</link>
+        <guid isPermaLink="true">http://localhost:4001/2021/07/09/jemalloc-use/</guid>
+        
+        <category>netty</category>
+        
+        
+        <category>c/c++</category>
+        
+        <category>优化</category>
+        
+      </item>
     
       <item>
         <title>Netty框架</title>
@@ -194,36 +416,6 @@ bazelisk 是bazel的版本管理工具，不同版本的onos使用了不同版�
         
         
         <category>Blog</category>
-        
-      </item>
-    
-      <item>
-        <title>测试博客</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#前言&quot; id=&quot;markdown-toc-前言&quot;&gt;前言&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
-
-这是一篇测试用的文章，主要测试博客中的一些功能是否正常
-&lt;img src=&quot;/assets/blog-img/test-sample.png&quot; alt=&quot;img&quot; /&gt;
-</description>
-        <pubDate>Mon, 31 May 2021 00:00:00 +0800</pubDate>
-        <link>http://localhost:4001/2021/05/31/hello-my-blog/</link>
-        <guid isPermaLink="true">http://localhost:4001/2021/05/31/hello-my-blog/</guid>
-        
-        <category>tag1</category>
-        
-        <category>tag2</category>
-        
-        <category>测试标签</category>
-        
-        
-        <category>c1</category>
-        
-        <category>c2</category>
-        
-        <category>测试类别</category>
         
       </item>
     

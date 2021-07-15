@@ -119,6 +119,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -189,6 +191,8 @@
         <ul id="markdown-toc">
   <li><a href="#锁" id="markdown-toc-锁">锁</a></li>
   <li><a href="#java-等待一个线程结束的方案" id="markdown-toc-java-等待一个线程结束的方案">java 等待一个线程结束的方案</a></li>
+  <li><a href="#守护线程" id="markdown-toc-守护线程">守护线程</a></li>
+  <li><a href="#线程池" id="markdown-toc-线程池">线程池</a></li>
 </ul>
 
 <h2 id="锁">锁</h2>
@@ -241,10 +245,74 @@ synchronized 是非公平锁，ReentrantLock通过带参构造公平锁</p>
   </li>
 </ol>
 
+<h2 id="守护线程">守护线程</h2>
+
+<p>Thread.setDeamon(boolean) 可将线程设置成守护线程，线程分为用户线程和守护线程，当不存在用户线程时，jvm会自动退出。</p>
+
+<h2 id="线程池">线程池</h2>
+
+
         </article>
         <hr>
 
         
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
         
             
             

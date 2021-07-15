@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>创建一个属于自己的博客</title>
-    <meta name="description" content="  前言  遇到的问题  参考资料前言很多人可能都有一种想法，写点东西记录下学习或生活，好记忆不如烂笔头，现在我们用博客来开启文字记忆。需要使用到的资源有：GiteePages，jekyll，Theme，主题是一个大牛开源的，只需要根据他的中文文档配置，基本可以完成搭建。遇到的问题      不蒜子的域名过期根据...">
+    <title>数字签名</title>
+    <meta name="description" content="  概念  存储  证书          SSL证书      自签名证书        SSL  工具  参考资料概念数字签名又名公钥数字签名，基于非对称加密算法和数字摘要算法，具有三大特性：可认证性(authentication)、不可抵赖性(non-repudiation)和完整性(integrity)。...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css">
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://localhost:4001/2021/07/01/blog-create/">
+    <link rel="canonical" href="http://localhost:4001/2021/07/14/criptogram-digital/">
     <link rel="alternate" type="application/rss+xml" title="刘波的学习记录" href="http://localhost:4001/feed.xml ">
 
 
@@ -129,11 +129,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>创建一个属于自己的博客</h1>
+        <h1>数字签名</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2021-07-01
+                <i class="fa fa-calendar"></i>2021-07-14
             </div>
 
             <div class="label-card">
@@ -156,7 +156,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Blog" title="Category: Blog" rel="category">Blog</a>
+        <a href="/category/#加密算法" title="Category: 加密算法" rel="category">加密算法</a>
     
   
 
@@ -173,11 +173,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Blog" title="Tag: Blog" rel="tag">Blog</a-->
-        <a href="/tag/#Blog" title="Tag: Blog" rel="tag">Blog</a>&nbsp;
-    
-        <!--a href="/tag/#Markdown" title="Tag: Markdown" rel="tag">Markdown</a-->
-        <a href="/tag/#Markdown" title="Tag: Markdown" rel="tag">Markdown</a>
+        <!--a href="/tag/#digital" title="Tag: digital" rel="tag">digital</a-->
+        <a href="/tag/#digital" title="Tag: digital" rel="tag">digital</a>
     
   
 
@@ -189,39 +186,82 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
-  <li><a href="#遇到的问题" id="markdown-toc-遇到的问题">遇到的问题</a></li>
+  <li><a href="#概念" id="markdown-toc-概念">概念</a></li>
+  <li><a href="#存储" id="markdown-toc-存储">存储</a></li>
+  <li><a href="#证书" id="markdown-toc-证书">证书</a>    <ul>
+      <li><a href="#ssl证书" id="markdown-toc-ssl证书">SSL证书</a></li>
+      <li><a href="#自签名证书" id="markdown-toc-自签名证书">自签名证书</a></li>
+    </ul>
+  </li>
+  <li><a href="#ssl" id="markdown-toc-ssl">SSL</a></li>
+  <li><a href="#工具" id="markdown-toc-工具">工具</a></li>
   <li><a href="#参考资料" id="markdown-toc-参考资料">参考资料</a></li>
 </ul>
 
-<h2 id="前言">前言</h2>
-<p>很多人可能都有一种想法，写点东西记录下学习或生活，好记忆不如烂笔头，现在我们用博客来开启文字记忆。</p>
+<h2 id="概念">概念</h2>
+<p>数字签名又名公钥数字签名，基于非对称加密算法和数字摘要算法，具有三大特性：可认证性(authentication)、不可抵赖性(non-repudiation)和完整性(integrity)。</p>
 
-<p>需要使用到的资源有：<a href="https://gitee.com/help/articles/4136">GiteePages</a>，<a href="http://jekyllcn.com/docs/">jekyll</a>，<a href="https://github.com/xudailong/xudailong.github.io">Theme</a>，主题是一个大牛开源的，只需要根据他的<a href="https://github.com/liubo11/xudailong.github.io/blob/master/README-zh-cn.md">中文文档</a>配置，基本可以完成搭建。</p>
+<p>首先我们考虑一个场景，客户端B在访问一个域名服务器S时要解决几个问题</p>
+<blockquote>
+  <ol>
+    <li>保证数据的安全，不被窃听</li>
+    <li>保证数据的完整，不被篡改</li>
+    <li>保证服务器是合法的，可认证的</li>
+  </ol>
+</blockquote>
 
-<h2 id="遇到的问题">遇到的问题</h2>
-<ol>
-  <li>
-    <p>不蒜子的域名过期
-根据<a href="http://ibruce.info/2015/04/04/busuanzi/">不蒜子网站</a>说明更改即可。</p>
-  </li>
-  <li>
-    <p>百度统计
-需要在<a href="https://tongji.baidu.com/web/welcome/products">百度统计官网</a>注册，更改_config.yml文件的配置，需要注意的是若网站1个月没有流量，可能失效。</p>
-  </li>
-  <li>
-    <p>文档撰写
-文档存放在_posts目录，使用Markdown语言编写，可参考<a href="https://www.runoob.com/markdown/md-tutorial.html">RUNOOB</a>的教程。</p>
-  </li>
-  <li>
-    <p>文档摘要
-在<code class="language-plaintext highlighter-rouge">_config.yml</code>中使用excerpt_separator来标记的，在本项目中使用的是四个连续空行</p>
-  </li>
-</ol>
+<p>其中最主要的是保证服务器的合法性，其他的都可以在确保服务器合法后通过协商密钥加密传输数据来解决，而保证服务器合法性的根本是证书，证书的基础就是数字签名。</p>
+
+<p>当然证书是验证证书持有者的合法性，所以不仅能验证服务器也能验证客户端，银行的U盾就是验证客户端的合法性。</p>
+
+<p>数字签名的核心还是使用的是非对称加密算法的私钥对需要签名的数据进行加密处理。</p>
+
+<h2 id="存储">存储</h2>
+<p>数字签名中牵扯到密钥、证书、密钥库的存储，密钥和证书一般都是使用ASN.1语法记录，存储格式可以是DER这类二进制文件，也可以是PEM这种经过Base64编码后的字符文件。</p>
+
+<p>常见证书文件后缀名有.cer、.crt、.rsa、.pem、.crs、.p7b等</p>
+
+<p>密钥库是包含公钥私钥和证书，其格式一般有JKS、JCEKS、PKCS#12等</p>
+<blockquote>
+  <p>JKS 扩展名.jks/.ks<br />
+JCEKS 扩展名.jce<br />
+PKCS#12 扩展名 .p12/.pfx</p>
+</blockquote>
+
+<h2 id="证书">证书</h2>
+<p>国际通用x509标准来描述证书的基本结构，目前版本是v3，其规定证书有哪些字段，各自意义是什么，哪些是必要字段，哪些是可选字段。</p>
+
+<p>前面提到证书是私钥对另外一个公钥的签名，而签名的私钥对应的公钥证书谁来颁发呢，所以引入了CA的概念，系统默认CA的自签名证书是合法的证书，目前操作系统中基本都安装了受信任的证书列表。</p>
+
+<h3 id="ssl证书">SSL证书</h3>
+<p>若需要支持https，则需要对域名申请ssl证书。阿里云上可注册免费域名，我随便注册了一个liuliu.work，申请免费的SSL证书，根据不同的服务器类型提供下载各类的密钥库文件或证书（证书都是一样的，只是保存证书的格式区别）。</p>
+
+<p><img src="/assets/blog-img/criptogram-digital-3-1.png" alt="img" /></p>
+
+<p>证书中的CN字段就是申请的二级域名。</p>
+
+<h3 id="自签名证书">自签名证书</h3>
+<p>我们自己创建一个非对称加密密钥对，用私钥对公钥颁发证书，这个证书就是自签名证书，其实和CA颁发的证书一样，只是自签名证书没有在系统的受信任证书列表中。</p>
+
+<p>Android的APK中使用的就是自签名证书。</p>
+
+<p>在Chrome设置中搜索证书，打开系统的证书管理页面，在这里可以导入自己的证书或证书库</p>
+
+<p><img src="/assets/blog-img/criptogram-digital-3-2.png" alt="img" /></p>
+
+<h2 id="ssl">SSL</h2>
+
+<h2 id="工具">工具</h2>
 
 <h2 id="参考资料">参考资料</h2>
 
-<p><a href="https://pandao.github.io/editor.md/">MarkDown编辑器</a></p>
+<p><a href="https://duanqz.github.io/2017-09-01-Android-Digital-Signature#13-%E4%BD%BF%E7%94%A8">Android数字签名机制</a></p>
+
+<p><a href="https://www.iteye.com/blog/falchion-1472453">PCKS标准</a></p>
+
+<p><a href="http://keystore-explorer.org/">keystore工具</a></p>
+
+<p><a href="https://blog.csdn.net/zzhongcy/article/details/22755317">https://blog.csdn.net/zzhongcy/article/details/22755317</a></p>
 
         </article>
         <hr>
@@ -233,20 +273,7 @@
                 
                     
                 
-                    
-                
             
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
                 
                     
                 
@@ -260,17 +287,11 @@
                 
                     
                 
-                    
-                
             
                 
                     
                 
-                    
-                
             
-                
-                    
                 
                     
                 
@@ -281,8 +302,6 @@
                 
                     
                 
-                    
-                
             
         
             
@@ -290,26 +309,7 @@
                 
                     
                 
-                    
-                
             
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
                 
                     
                 
@@ -320,20 +320,7 @@
                 
                     
                 
-                    
-                
             
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
                 
                     
                 
@@ -344,17 +331,40 @@
                 
                     
                 
+            
+        
+            
+            
+                
                     
                 
             
                 
                     
                 
+            
+        
+            
+            
+                
                     
                 
             
                 
                     
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
                 
                     
                 
@@ -365,13 +375,13 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2021/05/31/hello-my-blog/">测试博客</a></p>
+        <p><strong>上一篇</strong> <a href="/2021/07/12/criptogram/">常见加密算法</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/2021/07/01/build-bazel/">Bazel构建工具</a></p>
+        <p><strong>下一篇</strong> <a href="/2021/07/14/web-vue-elui-form/">ElementUI表单使用</a></p>
         
     </div>
 </div>

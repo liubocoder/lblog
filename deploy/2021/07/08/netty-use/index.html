@@ -119,6 +119,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -191,6 +193,7 @@
   <li><a href="#使用" id="markdown-toc-使用">使用</a>    <ul>
       <li><a href="#serverbootstrapbootstrap" id="markdown-toc-serverbootstrapbootstrap">ServerBootstrap/Bootstrap</a></li>
       <li><a href="#eventloopgroup" id="markdown-toc-eventloopgroup">EventLoopGroup</a></li>
+      <li><a href="#channelpipeline" id="markdown-toc-channelpipeline">ChannelPipeLine</a></li>
       <li><a href="#channelhandler" id="markdown-toc-channelhandler">ChannelHandler</a>        <ul>
           <li><a href="#自定义handler" id="markdown-toc-自定义handler">自定义handler</a></li>
         </ul>
@@ -223,7 +226,7 @@
 
 <h2 id="使用">使用</h2>
 
-<p>ServerBootstrap/Bootstrap EventLoopGroup ChannelHandler</p>
+<p>ServerBootstrap/Bootstrap EventLoopGroup ChannelPipeLine ChannelHandler</p>
 
 <h3 id="serverbootstrapbootstrap">ServerBootstrap/Bootstrap</h3>
 
@@ -232,6 +235,12 @@
 <h3 id="eventloopgroup">EventLoopGroup</h3>
 
 <p>使用某种IO复用策略的线程池，常用EpollEventLoopGroup、NioEventLoopGroup</p>
+
+<h3 id="channelpipeline">ChannelPipeLine</h3>
+
+<p>用于管理连接，编排Handler的调用顺序及事件。</p>
+
+<p>新连接都会回调initChannel()方法</p>
 
 <h3 id="channelhandler">ChannelHandler</h3>
 
@@ -272,6 +281,8 @@
 <h4 id="自定义handler">自定义handler</h4>
 <p>一般从ByteToMessageDecoder、ChannelOutboundHandlerAdapter、ChannelInboundHandlerAdapter等这类开始继承实现相关自定义业务。</p>
 
+<p>通常业务中比较关心的是ChannelInboundHandler接口中的channelActive与channelInactive方法，连接建立与断开时的资源创建与释放等操作。</p>
+
 <h3 id="channeloption常用配置">ChannelOption常用配置</h3>
 
 <ol>
@@ -287,7 +298,7 @@
     <p>TCP_NODELAY</p>
 
     <blockquote>
-      <p>是否禁用Nagle算法。Nagel算法将小的碎片数据连接成更大的报文来最小化所发送的报文的数量，如果需要发送一些较小的报文，则需要禁用该算法，从而最小化报文传输延时<br />
+      <p>是否禁用Nagle算法。Nagel算法将小的碎片数据连接成更大的报文来最小化所发送的报文的数量，如果需要发送一些较小的报文，则需要禁用该算法，从而降低报文传输延时<br />
  默认false，表示启用了该算法</p>
     </blockquote>
   </li>
@@ -303,7 +314,7 @@
     <p>SO_LINGER</p>
 
     <blockquote>
-      <p>关闭Socket的延迟时间，socket.close() 方法调用后立即返回<br />
+      <p>Socket关闭的延迟时间，socket.close() 方法调用后立即返回<br />
  默认-1，表示禁用该功能</p>
     </blockquote>
   </li>
@@ -368,11 +379,65 @@
         
             
             
+        
+            
+            
                 
                     
                 
                     
                 
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <h2 id="similar_posts">Similar Posts</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/2021/07/09/jemalloc-use/">jemalloc介绍
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
             
                 
                     
@@ -410,6 +475,21 @@
                     
                 
             
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
                 
                     
                 
@@ -417,6 +497,8 @@
                 
             
         
+        
+            </ul>
         
 
         <div class="post-recent">
@@ -427,6 +509,8 @@
     </div>
     <div class="nex">
 
+        
+        <p><strong>下一篇</strong> <a href="/2021/07/09/jemalloc-use/">jemalloc介绍</a></p>
         
     </div>
 </div>
@@ -444,6 +528,8 @@
                     Content
                 </div>
                 <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">Similar Posts</a></li>
                     
                     <!-- <li><a href="#comments">Comments</a></li> -->
                 </ul>

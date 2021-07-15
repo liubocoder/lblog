@@ -30,7 +30,7 @@ typora-root-url: ..
 
 ## 使用
 
-ServerBootstrap/Bootstrap EventLoopGroup ChannelHandler
+ServerBootstrap/Bootstrap EventLoopGroup ChannelPipeLine ChannelHandler
 
 ### ServerBootstrap/Bootstrap
 
@@ -39,6 +39,12 @@ ServerBootstrap/Bootstrap EventLoopGroup ChannelHandler
 ### EventLoopGroup
 
 使用某种IO复用策略的线程池，常用EpollEventLoopGroup、NioEventLoopGroup
+
+### ChannelPipeLine
+
+用于管理连接，编排Handler的调用顺序及事件。
+
+新连接都会回调initChannel()方法
 
 ### ChannelHandler
 
@@ -70,6 +76,8 @@ ChannelHandler是实现业务中最重要的环节，常见的类型有：Channe
 #### 自定义handler
 一般从ByteToMessageDecoder、ChannelOutboundHandlerAdapter、ChannelInboundHandlerAdapter等这类开始继承实现相关自定义业务。
 
+通常业务中比较关心的是ChannelInboundHandler接口中的channelActive与channelInactive方法，连接建立与断开时的资源创建与释放等操作。
+
 ### ChannelOption常用配置
 
 1. SO_KEEPALIVE
@@ -79,7 +87,7 @@ ChannelHandler是实现业务中最重要的环节，常见的类型有：Channe
 
 2. TCP_NODELAY
 
-    > 是否禁用Nagle算法。Nagel算法将小的碎片数据连接成更大的报文来最小化所发送的报文的数量，如果需要发送一些较小的报文，则需要禁用该算法，从而最小化报文传输延时  
+    > 是否禁用Nagle算法。Nagel算法将小的碎片数据连接成更大的报文来最小化所发送的报文的数量，如果需要发送一些较小的报文，则需要禁用该算法，从而降低报文传输延时  
     默认false，表示启用了该算法
 
 3. SO_REUSEADDR
@@ -89,7 +97,7 @@ ChannelHandler是实现业务中最重要的环节，常见的类型有：Channe
 
 4. SO_LINGER
 
-    > 关闭Socket的延迟时间，socket.close() 方法调用后立即返回  
+    > Socket关闭的延迟时间，socket.close() 方法调用后立即返回  
     默认-1，表示禁用该功能
 
 5. SO_SNDBUF

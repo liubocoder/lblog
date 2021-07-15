@@ -10,7 +10,6 @@ typora-root-url: ..
 * content
 {:toc}
 
-
 ## 锁
 
 1. 偏向锁/轻量级锁/重量级锁
@@ -46,3 +45,11 @@ synchronized 是非公平锁，ReentrantLock通过带参构造公平锁
 3. 使用锁
 
 4. 其他封装方法 如：CountDownLatch、CyclicBarrier、Thread.join()、Future等等，都是直接或间接使用锁或wait/notify机制
+
+## 守护线程
+
+Thread.setDeamon(boolean) 可将线程设置成守护线程，线程分为用户线程和守护线程，当不存在用户线程时，jvm会自动退出。
+
+## 线程池
+
+

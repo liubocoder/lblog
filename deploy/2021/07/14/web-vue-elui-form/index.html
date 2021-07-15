@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>创建一个属于自己的博客</title>
-    <meta name="description" content="  前言  遇到的问题  参考资料前言很多人可能都有一种想法，写点东西记录下学习或生活，好记忆不如烂笔头，现在我们用博客来开启文字记忆。需要使用到的资源有：GiteePages，jekyll，Theme，主题是一个大牛开源的，只需要根据他的中文文档配置，基本可以完成搭建。遇到的问题      不蒜子的域名过期根据...">
+    <title>ElementUI表单使用</title>
+    <meta name="description" content="  前言  1.基本使用前言最近业务中一个比较复杂表单，使用的是ElementUI，记录下表单的使用和遇到的问题1.基本使用&lt;el-form&gt;    &lt;el-form-item&gt;    &lt;/el-form-item&gt;&lt;/el-form&gt;在el-form标签内部可以嵌...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css">
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://localhost:4001/2021/07/01/blog-create/">
+    <link rel="canonical" href="http://localhost:4001/2021/07/14/web-vue-elui-form/">
     <link rel="alternate" type="application/rss+xml" title="刘波的学习记录" href="http://localhost:4001/feed.xml ">
 
 
@@ -129,11 +129,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>创建一个属于自己的博客</h1>
+        <h1>ElementUI表单使用</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2021-07-01
+                <i class="fa fa-calendar"></i>2021-07-14
             </div>
 
             <div class="label-card">
@@ -156,7 +156,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Blog" title="Category: Blog" rel="category">Blog</a>
+        <a href="/category/#Web" title="Category: Web" rel="category">Web</a>&nbsp;
+    
+        <a href="/category/#JavaScript" title="Category: JavaScript" rel="category">JavaScript</a>
     
   
 
@@ -173,11 +175,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Blog" title="Tag: Blog" rel="tag">Blog</a-->
-        <a href="/tag/#Blog" title="Tag: Blog" rel="tag">Blog</a>&nbsp;
+        <!--a href="/tag/#vue" title="Tag: vue" rel="tag">vue</a-->
+        <a href="/tag/#vue" title="Tag: vue" rel="tag">vue</a>&nbsp;
     
-        <!--a href="/tag/#Markdown" title="Tag: Markdown" rel="tag">Markdown</a-->
-        <a href="/tag/#Markdown" title="Tag: Markdown" rel="tag">Markdown</a>
+        <!--a href="/tag/#elementui" title="Tag: elementui" rel="tag">elementui</a-->
+        <a href="/tag/#elementui" title="Tag: elementui" rel="tag">elementui</a>
     
   
 
@@ -190,38 +192,103 @@
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
   <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
-  <li><a href="#遇到的问题" id="markdown-toc-遇到的问题">遇到的问题</a></li>
+  <li><a href="#1基本使用" id="markdown-toc-1基本使用">1.基本使用</a></li>
+  <li><a href="#2el-form-item多子标签情况" id="markdown-toc-2el-form-item多子标签情况">2.el-form-item多子标签情况</a></li>
+  <li><a href="#3rule的使用" id="markdown-toc-3rule的使用">3.rule的使用</a></li>
+  <li><a href="#4焦点定位到第一个校验不过的位置" id="markdown-toc-4焦点定位到第一个校验不过的位置">4.焦点定位到第一个校验不过的位置</a></li>
+  <li><a href="#5注意v-if与v-show的区别" id="markdown-toc-5注意v-if与v-show的区别">5.注意v-if与v-show的区别</a></li>
+  <li><a href="#6正则表达式" id="markdown-toc-6正则表达式">6.正则表达式</a></li>
   <li><a href="#参考资料" id="markdown-toc-参考资料">参考资料</a></li>
 </ul>
 
 <h2 id="前言">前言</h2>
-<p>很多人可能都有一种想法，写点东西记录下学习或生活，好记忆不如烂笔头，现在我们用博客来开启文字记忆。</p>
+<p>最近业务中一个比较复杂表单，使用的是ElementUI，记录下表单的使用和遇到的问题</p>
 
-<p>需要使用到的资源有：<a href="https://gitee.com/help/articles/4136">GiteePages</a>，<a href="http://jekyllcn.com/docs/">jekyll</a>，<a href="https://github.com/xudailong/xudailong.github.io">Theme</a>，主题是一个大牛开源的，只需要根据他的<a href="https://github.com/liubo11/xudailong.github.io/blob/master/README-zh-cn.md">中文文档</a>配置，基本可以完成搭建。</p>
+<h2 id="1基本使用">1.基本使用</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;el-form&gt;
+    &lt;el-form-item&gt;
+    &lt;/el-form-item&gt;
+&lt;/el-form&gt;
+</code></pre></div></div>
+<p>在el-form标签内部可以嵌套其他标签</p>
 
-<h2 id="遇到的问题">遇到的问题</h2>
-<ol>
-  <li>
-    <p>不蒜子的域名过期
-根据<a href="http://ibruce.info/2015/04/04/busuanzi/">不蒜子网站</a>说明更改即可。</p>
-  </li>
-  <li>
-    <p>百度统计
-需要在<a href="https://tongji.baidu.com/web/welcome/products">百度统计官网</a>注册，更改_config.yml文件的配置，需要注意的是若网站1个月没有流量，可能失效。</p>
-  </li>
-  <li>
-    <p>文档撰写
-文档存放在_posts目录，使用Markdown语言编写，可参考<a href="https://www.runoob.com/markdown/md-tutorial.html">RUNOOB</a>的教程。</p>
-  </li>
-  <li>
-    <p>文档摘要
-在<code class="language-plaintext highlighter-rouge">_config.yml</code>中使用excerpt_separator来标记的，在本项目中使用的是四个连续空行</p>
-  </li>
-</ol>
+<h2 id="2el-form-item多子标签情况">2.el-form-item多子标签情况</h2>
+
+<p>若使用rules作为校验输入合法性，<code class="language-plaintext highlighter-rouge">&lt;el-form-item&gt;&lt;/el-form-item&gt;</code>中只能有一个作为有效输入的控件，比如可以在其中添加checkbox和input，checkbox仅作为input是否能输入的标记，input绑定到表单数据中，el-form-item的prop属性需要指向input绑定的相对路径。</p>
+
+<p>例如：el-form的model绑定了formdata，input绑定myformdata.a.b.c，prop则需要是a.b.c，prop也可以动态计算。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;el-form :model="myformdata"&gt;
+    &lt;el-form-item prop="a.b.c" :rules="xx"&gt;
+        &lt;el-checkbox&gt;&lt;/&lt;el-checkbox&gt;
+        &lt;el-input v-model="myformdata.a.b.c"&gt;&lt;/el-input&gt;
+    &lt;/el-form-item&gt;
+&lt;/el-form&gt;
+</code></pre></div></div>
+
+<h2 id="3rule的使用">3.rule的使用</h2>
+
+<p>具体<a href="https://www.cnblogs.com/xyyt/p/13366812.html">参考这里</a>，</p>
+
+<p>(1) 自定义rule直接定义在return函数中，this指向的不是vue，需要单独定义出来</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data() {
+    const ruleValidator = (rule, value, callback) =&gt; {
+        ... this.myformdata
+    }
+    return {
+        myformdata: {},
+        myrules: [
+        {
+          validator: ruleValidator,
+          trigger: ['blur', 'change']
+        }
+      ]
+    }
+}
+</code></pre></div></div>
+
+<p>(2) 在validator函数中必须要调用一次callback()函数，否则会导致提交的时候一直等待校验结果。</p>
+
+<h2 id="4焦点定位到第一个校验不过的位置">4.焦点定位到第一个校验不过的位置</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>this.$refs[formName].validate((valid) =&gt; {
+        if (valid) {
+            ...
+        } else {
+            setTimeout(() =&gt; document.getElementsByClassName("is-error")[0].querySelector('input').focus(), 100)
+            ...
+        }
+    })
+</code></pre></div></div>
+
+<h2 id="5注意v-if与v-show的区别">5.注意v-if与v-show的区别</h2>
+<p>判断不通时前者过会移除DOM，后者不会</p>
+
+<h2 id="6正则表达式">6.正则表达式</h2>
+
+<p>正则表达式是非常复杂的，单独写几篇都记录不完，这里仅简单写下使用遇到的问题，以JavaScript为例。</p>
+
+<p>(1) 定义正则对象方式</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let re1 = \abc\
+let re = \abc\i
+let nre = new RegExp('abc')
+let nre1 = new RegExp('abc', 'i')
+</code></pre></div></div>
+
+<p>(2) 全词匹配
+需要用到两个符号^$，^匹配输入字符的开始位置，&amp;匹配输入字符的结束位置，例如<code class="language-plaintext highlighter-rouge">\^(abc)$\i</code>，忽略大小写的abc全词匹配。</p>
+
+<p>(3) 操作符优先级
+操作符是有优先级的，因此不太明确的时候可以加’()’来标示一个子的匹配项，用’|’（其含义为’或’）标示选择匹配，’|’的优先级最低。</p>
 
 <h2 id="参考资料">参考资料</h2>
 
-<p><a href="https://pandao.github.io/editor.md/">MarkDown编辑器</a></p>
+<p><a href="https://cn.vuejs.org/v2/guide/computed.html">vue</a></p>
+
+<p><a href="https://element.eleme.io/#/zh-CN/component/form">ElementUI</a></p>
+
+<p><a href="https://www.runoob.com/regexp/regexp-tutorial.html">正则表达式教程</a></p>
+
+<p><a href="https://www.cnblogs.com/xyyt/p/13366812.html">ElementUI表单学习</a></p>
 
         </article>
         <hr>
@@ -236,21 +303,6 @@
                     
                 
             
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
         
             
             
@@ -316,6 +368,21 @@
             
         
             
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
             
                 
                     
@@ -365,13 +432,11 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2021/05/31/hello-my-blog/">测试博客</a></p>
+        <p><strong>上一篇</strong> <a href="/2021/07/14/criptogram-digital/">数字签名</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/2021/07/01/build-bazel/">Bazel构建工具</a></p>
         
     </div>
 </div>

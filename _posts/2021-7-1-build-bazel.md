@@ -51,7 +51,7 @@ bazel以target作为构建的最小单元。一个项目里面必须要包含WOR
 
 ![img](/assets/blog-img/build-bazel-2-1.png)
 
-FuncInterface是一个接口，FuncImpl实现该结构，MainTest包含main函数，调用FuncImpl的实现方法。
+FuncInterface是一个接口，FuncImpl实现该接口，MainTest包含main函数，调用FuncImpl的实现方法。
 
 BUILD
 
