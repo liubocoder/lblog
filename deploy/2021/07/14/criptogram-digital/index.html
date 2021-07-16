@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>数字签名</title>
-    <meta name="description" content="  概念  存储  证书          SSL证书      自签名证书        SSL  工具  参考资料概念数字签名又名公钥数字签名，基于非对称加密算法和数字摘要算法，具有三大特性：可认证性(authentication)、不可抵赖性(non-repudiation)和完整性(integrity)。...">
+    <meta name="description" content="  概念概念数字签名又名公钥数字签名，基于非对称加密算法和数字摘要算法，具有三大特性：可认证性(authentication)、不可抵赖性(non-repudiation)和完整性(integrity)。首先我们考虑一个场景，客户端B在访问一个域名服务器S时要解决几个问题      保证数据的安全，不被窃听   ...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
@@ -194,7 +194,11 @@
     </ul>
   </li>
   <li><a href="#ssl" id="markdown-toc-ssl">SSL</a></li>
-  <li><a href="#工具" id="markdown-toc-工具">工具</a></li>
+  <li><a href="#相关代码" id="markdown-toc-相关代码">相关代码</a>    <ul>
+      <li><a href="#keytool自建根证书及签发证书流程" id="markdown-toc-keytool自建根证书及签发证书流程">keytool自建根证书及签发证书流程</a></li>
+      <li><a href="#openssl使用" id="markdown-toc-openssl使用">openssl使用</a></li>
+    </ul>
+  </li>
   <li><a href="#参考资料" id="markdown-toc-参考资料">参考资料</a></li>
 </ul>
 
@@ -212,14 +216,14 @@
 
 <p>其中最主要的是保证服务器的合法性，其他的都可以在确保服务器合法后通过协商密钥加密传输数据来解决，而保证服务器合法性的根本是证书，证书的基础就是数字签名。</p>
 
-<p>当然证书是验证证书持有者的合法性，所以不仅能验证服务器也能验证客户端，银行的U盾就是验证客户端的合法性。</p>
+<p>当然证书是验证证书持有者的合法性，所以不仅能验证服务器也能验证客户端，例如：银行的U盾用于验证客户端的合法性。</p>
 
 <p>数字签名的核心还是使用的是非对称加密算法的私钥对需要签名的数据进行加密处理。</p>
 
 <h2 id="存储">存储</h2>
 <p>数字签名中牵扯到密钥、证书、密钥库的存储，密钥和证书一般都是使用ASN.1语法记录，存储格式可以是DER这类二进制文件，也可以是PEM这种经过Base64编码后的字符文件。</p>
 
-<p>常见证书文件后缀名有.cer、.crt、.rsa、.pem、.crs、.p7b等</p>
+<p>常见证书文件后缀名有.cer、.crt、.rsa、.pem、.crs、.p7b等，windows系统能识别到.cer .crt .p7b的文件。</p>
 
 <p>密钥库是包含公钥私钥和证书，其格式一般有JKS、JCEKS、PKCS#12等</p>
 <blockquote>
@@ -241,7 +245,7 @@ PKCS#12 扩展名 .p12/.pfx</p>
 <p>证书中的CN字段就是申请的二级域名。</p>
 
 <h3 id="自签名证书">自签名证书</h3>
-<p>我们自己创建一个非对称加密密钥对，用私钥对公钥颁发证书，这个证书就是自签名证书，其实和CA颁发的证书一样，只是自签名证书没有在系统的受信任证书列表中。</p>
+<p>我们自己创建一个非对称加密密钥对，用私钥对公钥签发证书，这个证书就是自签名证书，其实和CA颁发的证书一样，只是自签名证书没有在系统的受信任证书列表中。</p>
 
 <p>Android的APK中使用的就是自签名证书。</p>
 
@@ -250,8 +254,66 @@ PKCS#12 扩展名 .p12/.pfx</p>
 <p><img src="/assets/blog-img/criptogram-digital-3-2.png" alt="img" /></p>
 
 <h2 id="ssl">SSL</h2>
+<p>SSL（Secure Sockets Layer）一般是工作在传输层之上，用以保障应用层协议安全。SSL是基于证书、各类加密算法、数据摘要算法等各类算法之上，目前最新版本是TLS1.3版本，互联网标准化组织接手SSL后命名为TLS（Transport Layer Security）。</p>
 
-<h2 id="工具">工具</h2>
+<p>SSL位于传输层和应用层之间，应用层协议都可以基于SSL来保障数据安全。</p>
+
+<h2 id="相关代码">相关代码</h2>
+
+<h3 id="keytool自建根证书及签发证书流程">keytool自建根证书及签发证书流程</h3>
+
+<ol>
+  <li>
+    <p>创建密钥仓库<br />
+<code class="language-plaintext highlighter-rouge">keytool -genkey -alias rootali -keysize 2048 -validity 3650 -keyalg RSA -dname "CN=cn.lb" -keypass 123456 -storepass 123456 -keystore myrootStore.p12 -storetype PKCS12</code><br />
+<code class="language-plaintext highlighter-rouge">-storetype PKCS12</code>用于指定密钥库类型为PKC12，若不指定，默认是JKS</p>
+  </li>
+  <li>
+    <p>根据密钥仓库的某个密钥对 创建自签名证书<br />
+<code class="language-plaintext highlighter-rouge">keytool -export -alias rootali -keystore myrootStore.p12 -storepass 123456 -file myCaCert.cer</code></p>
+  </li>
+  <li>
+    <p>创建受信任的证书仓库，这里直接导入了上一步自签名证书<br />
+<code class="language-plaintext highlighter-rouge">keytool -importcert -alias mytrustalias -file myCaCert.cer -storetype PKCS12 -keystore mytruststore.p12</code></p>
+  </li>
+  <li>
+    <p>用户申请签发证书<br />
+(1) 用户需要签发证书，首先得有个密钥对，所以先创建密钥对，与步骤1一致<br />
+<code class="language-plaintext highlighter-rouge">keytool -genkey -alias userali1 -keysize 2048 -validity 365 -keyalg RSA -dname "CN=cn.lb.a" -keypass 123456 -storepass 123456 -keystore user1.p12 -storetype PKCS12</code>
+(2) 用户提出申请，生成证书签发请求文件<br />
+<code class="language-plaintext highlighter-rouge">keytool -certreq -alias userali1 -file usercsr.csr -keystore user1.p12</code></p>
+  </li>
+  <li>
+    <p>签发证书
+使用创建的根密钥库对用户的证书申请文件签名<br />
+<code class="language-plaintext highlighter-rouge">keytool -gencert -validity 3650 -alias rootali -keystore myrootStore.p12 -infile mysvCsr1.csr -outfile mysvCsr1.cer</code></p>
+  </li>
+</ol>
+
+<h3 id="openssl使用">openssl使用</h3>
+
+<p>创建根私钥<br />
+<code class="language-plaintext highlighter-rouge">openssl genrsa -out rootca.pem 2048</code></p>
+
+<p>生成自签证书<br />
+<code class="language-plaintext highlighter-rouge">openssl req -x509 -new -key rootca.pem -out root.crt</code></p>
+
+<p>根据私钥生成公钥<br />
+<code class="language-plaintext highlighter-rouge">openssl rsa -in rootca.pem -pubout -out rootcapub.pem</code></p>
+
+<p>生成客户端私钥<br />
+<code class="language-plaintext highlighter-rouge">openssl genrsa -out clientkey.pem 2048</code></p>
+
+<p>生成客户端私钥证书申请文件<br />
+<code class="language-plaintext highlighter-rouge">openssl req -new -key clientkey.pem -out client.csr</code></p>
+
+<p>使用根私钥签名客户端的申请文件<br />
+<code class="language-plaintext highlighter-rouge">openssl x509 -req -in client.csr -CA root.crt -CAkey rootca.pem -CAcreateserial -days 3650 -out client.crt</code></p>
+
+<p>生成密钥库<br />
+<code class="language-plaintext highlighter-rouge">openssl pkcs12 -export -in client.crt -inkey clientkey.pem -out client.p12</code></p>
+
+<p>以上命令使用了测试名称和默认参数，并在同一目录下生成文件，后续使用需要注意调整。</p>
 
 <h2 id="参考资料">参考资料</h2>
 
@@ -261,7 +323,9 @@ PKCS#12 扩展名 .p12/.pfx</p>
 
 <p><a href="http://keystore-explorer.org/">keystore工具</a></p>
 
-<p><a href="https://blog.csdn.net/zzhongcy/article/details/22755317">https://blog.csdn.net/zzhongcy/article/details/22755317</a></p>
+<p><a href="https://blog.csdn.net/qq_38265137/article/details/90112705">SSL协议原理</a></p>
+
+<p><a href="https://blog.csdn.net/zhixinhuacom/article/details/79126274">netty使用ssl</a></p>
 
         </article>
         <hr>

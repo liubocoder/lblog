@@ -60,22 +60,67 @@ Android的APK中使用的就是自签名证书。
 ![img](/assets/blog-img/criptogram-digital-3-2.png)
 
 ## SSL
+SSL（Secure Sockets Layer）一般是工作在传输层之上，用以保障应用层协议安全。SSL是基于证书、各类加密算法、数据摘要算法等各类算法之上，目前最新版本是TLS1.3版本，互联网标准化组织接手SSL后命名为TLS（Transport Layer Security）。
+
+SSL位于传输层和应用层之间，应用层协议都可以基于SSL来保障数据安全。
 
 ## 相关代码
 
-openssl
-keytool
+### keytool自建根证书及签发证书流程
 
-创建密钥对
-创建密钥
-签发证书
+1. 创建密钥仓库  
+`keytool -genkey -alias rootali -keysize 2048 -validity 3650 -keyalg RSA -dname "CN=cn.lb" -keypass 123456 -storepass 123456 -keystore myrootStore.p12 -storetype PKCS12`  
+`-storetype PKCS12`用于指定密钥库类型为PKC12，若不指定，默认是JKS  
+
+2. 根据密钥仓库的某个密钥对 创建自签名证书  
+`keytool -export -alias rootali -keystore myrootStore.p12 -storepass 123456 -file myCaCert.cer`
+
+3. 创建受信任的证书仓库，这里直接导入了上一步自签名证书  
+`keytool -importcert -alias mytrustalias -file myCaCert.cer -storetype PKCS12 -keystore mytruststore.p12`
+
+4. 用户申请签发证书  
+(1) 用户需要签发证书，首先得有个密钥对，所以先创建密钥对，与步骤1一致  
+`keytool -genkey -alias userali1 -keysize 2048 -validity 365 -keyalg RSA -dname "CN=cn.lb.a" -keypass 123456 -storepass 123456 -keystore user1.p12 -storetype PKCS12`
+(2) 用户提出申请，生成证书签发请求文件  
+`keytool -certreq -alias userali1 -file usercsr.csr -keystore user1.p12`
+
+5. 签发证书
+使用创建的根密钥库对用户的证书申请文件签名  
+`keytool -gencert -validity 3650 -alias rootali -keystore myrootStore.p12 -infile mysvCsr1.csr -outfile mysvCsr1.cer`
+
+### openssl使用
+
+创建根私钥  
+`openssl genrsa -out rootca.pem 2048`
+
+生成自签证书  
+`openssl req -x509 -new -key rootca.pem -out root.crt`
+
+根据私钥生成公钥  
+`openssl rsa -in rootca.pem -pubout -out rootcapub.pem`
+
+生成客户端私钥  
+`openssl genrsa -out clientkey.pem 2048`
+
+生成客户端私钥证书申请文件  
+`openssl req -new -key clientkey.pem -out client.csr`
+
+使用根私钥签名客户端的申请文件  
+`openssl x509 -req -in client.csr -CA root.crt -CAkey rootca.pem -CAcreateserial -days 3650 -out client.crt`
+
+生成密钥库  
+`openssl pkcs12 -export -in client.crt -inkey clientkey.pem -out client.p12`
+
+以上命令使用了测试名称和默认参数，并在同一目录下生成文件，后续使用需要注意调整。
 
 ## 参考资料
 
- [Android数字签名机制](https://duanqz.github.io/2017-09-01-Android-Digital-Signature#13-%E4%BD%BF%E7%94%A8)
+[Android数字签名机制](https://duanqz.github.io/2017-09-01-Android-Digital-Signature#13-%E4%BD%BF%E7%94%A8)
 
 [PCKS标准](https://www.iteye.com/blog/falchion-1472453)
 
 [keystore工具](http://keystore-explorer.org/)
 
-<https://blog.csdn.net/zzhongcy/article/details/22755317>
+[SSL协议原理](https://blog.csdn.net/qq_38265137/article/details/90112705)
+
+[netty使用ssl](https://blog.csdn.net/zhixinhuacom/article/details/79126274)

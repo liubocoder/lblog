@@ -82,6 +82,11 @@ MD5一般用16进制表示，结果是32位的字符串
 ### SM3
 SM3是我国公布的商用密码杂凑算法标准，是SHA-256基础上改进实现的一种算法。
 
+## 密钥协商
+经典的密钥协商算法DH（Diffie-Hellman），通常与ECC算法协同使用ECDH。
+
 ## 参考资料
 
 [分组加密算法加密模式](https://blog.csdn.net/weixin_41745909/article/details/102807092)
+
+[Diffie-Hellman密钥协商算法](https://www.cnblogs.com/it88-laobing/p/14912573.html)
