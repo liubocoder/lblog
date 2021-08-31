@@ -10,6 +10,13 @@ type: page
 {:toc}
 
 ## 工具
+* [一些Linux系统工监控工具](https://blog.csdn.net/zjy900507/article/details/80447915)
+    列举一些系统工具
+
+* [KeyStore](http://keystore-explorer.org/)
+
+    用于管理密钥库和ssl证书
+
 * [在线工具箱-主要是编码、加密等](https://the-x.cn/)
 
 * [弱网测试工具介绍](https://www.cnblogs.com/jinjiangongzuoshi/p/5272787.html)
@@ -53,32 +60,6 @@ type: page
 - [http://regexr.com/](http://regexr.com/)
 - [google fonts](https://fonts.google.com/)
   - [Google Fonts 加速代理](https://fengmk2.com/blog/2016/google-fonts-mirror)
-
-## 构建工具
-
-### Gradle
-
-### Maven
-
-### Bazel
-
-### Make
-
-### CMake
-
-## 系统
-
-### Linux
-
-### Android
-
-## 编程语言
-
-### Java
-
-### C
-
-### Python
 
 ### JavaScript
 
@@ -144,13 +125,7 @@ type: page
 
 ### Vue
 
-* [awesome-vue](https://github.com/vuejs/awesome-vue)
-* [Vue.js 和 Webpack（一） -Randy Lu](http://djyde.github.io/2015/08/29/vuejs-and-webpack-1/)
-* [Vue.js 和 Webpack（二） -Randy Lu](http://djyde.github.io/2015/08/30/vuejs-and-webpack-2/)
-* [Vue.js 和 Webpack（三） -Randy Lu](http://djyde.github.io/2015/08/31/vuejs-and-webpack-3/)
-* [Vuejs 1.0 中文系列视频教程 -Laravist](https://laravist.com/series/vue-js-1-0-in-action-series)
-* [Vuejs-QQ群 相关资料](https://github.com/jsfront/src/blob/master/vuejs.md) 来自豪情
-
+* [Vue官网](https://cn.vuejs.org/)
 
 ### React
 
@@ -175,28 +150,6 @@ type: page
 
 * [测试框架 Mocha 实例教程 阮一峰](http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html)
 
-## 类库与插件
-
-* [Masonry](http://masonry.desandro.com/)
-
-    瀑布流布局库。
-
-* [jssor](http://www.jssor.com/)
-
-    图片轮播图其 GitHub 地址 [jssor/slider](https://github.com/jssor/slider)
-
-* [cssslider](http://cssslider.com/)
-
-    纯 CSS 的图片轮播图。
-
-- [gumshoe](https://github.com/cferdinandi/gumshoe)
-
-    A simple, framework-agnostic scrollspy script.
-
-- [smooth-scroll](https://github.com/cferdinandi/smooth-scroll)
-
-  A simple vanilla JS script to animate scrolling to anchor links.
-
 ## 模块化
 
 * [后端程序员的 JavaScript 之旅 - 模块化（一）](http://lishaopeng.com/2016/02/05/js-module/)
@@ -204,12 +157,6 @@ type: page
 * [后端程序员的 JavaScript 之旅 - 模块化（三）](http://lishaopeng.com/2016/02/19/js-module3/)
 
 * [CommonJS 规范 -来自 阮一峰 JavaScript 标准参考教程(alpha)](http://javascript.ruanyifeng.com/nodejs/module.html)
-
-## other articles
-
-- [<head> Cheat Sheet](http://gethead.info/)
-* [将footer固定在页面底部的实现方法](https://segmentfault.com/a/1190000004453249)
-- [HTML5 视频 By Pete LePage](https://www.html5rocks.com/zh/tutorials/video/basics/)
 
 ## 编辑器
 
@@ -274,6 +221,9 @@ Syntax Theme: Atom Dark or One Dark
 * [进击的马斯特 http://pinkyjie.com/](http://pinkyjie.com/)
 
     马斯特，87年生人，爱溜冰的码农。技术： Javascript、Python、Mac、iOS
+
+* [Tony Deng https://tonydeng.github.io](https://tonydeng.github.io)
+    Tony Deng网络相关的总结非常好<https://tonydeng.github.io/sdn-handbook>
 
 * [Jerry Qu](https://imququ.com/)
 

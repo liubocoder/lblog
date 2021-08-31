@@ -5,9 +5,46 @@
     <description></description>
     <link>http://localhost:4001/</link>
     <atom:link href="http://localhost:4001/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 16 Jul 2021 17:48:58 +0800</pubDate>
-    <lastBuildDate>Fri, 16 Jul 2021 17:48:58 +0800</lastBuildDate>
+    <pubDate>Mon, 19 Jul 2021 18:30:01 +0800</pubDate>
+    <lastBuildDate>Mon, 19 Jul 2021 18:30:01 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>Docker基础</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#docker常用命令&quot; id=&quot;markdown-toc-docker常用命令&quot;&gt;Docker常用命令&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;docker常用命令&quot;&gt;Docker常用命令&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    仅创建镜像
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker create&lt;/code&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    运行（不存在将创建镜像）
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker run&lt;/code&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo docker run -d -it -p 8181:8181 --name onos gwsdn/onos:2.6.0
+ -d deamon后台，--rm一次性容器，运行结束后删除
+ -i 始终保持交互状态
+ -t 终端
+ -v 映射文件或目录，例如 -v /opt/conf/nginx.conf:/etc/xx.conf，注意宿主机地址不是‘/’或‘~/’开头，则是Volume机制
+ -p 端口映射，默认是tcp端口  -p 80:8080/tcp，udp写为 -p 8181:8181/udp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;a href=&quot;https://docs.docker.com/storage/volumes/&quot;&gt;Volume机制参考这里&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Mon, 19 Jul 2021 00:00:00 +0800</pubDate>
+        <link>http://localhost:4001/2021/07/19/docker-base/</link>
+        <guid isPermaLink="true">http://localhost:4001/2021/07/19/docker-base/</guid>
+        
+        <category>docker</category>
+        
+        
+        <category>后端</category>
+        
+      </item>
     
       <item>
         <title>ElementUI表单使用</title>
@@ -310,56 +347,6 @@ bazelisk 是bazel的版本管理工具，不同版本的onos使用了不同版�
         
         
         <category>Build</category>
-        
-      </item>
-    
-      <item>
-        <title>创建一个属于自己的博客</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#前言&quot; id=&quot;markdown-toc-前言&quot;&gt;前言&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#遇到的问题&quot; id=&quot;markdown-toc-遇到的问题&quot;&gt;遇到的问题&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#参考资料&quot; id=&quot;markdown-toc-参考资料&quot;&gt;参考资料&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
-很多人可能都有一种想法，写点东西记录下学习或生活，好记忆不如烂笔头，现在我们用博客来开启文字记忆。
-
-需要使用到的资源有：&lt;a href=&quot;https://gitee.com/help/articles/4136&quot;&gt;GiteePages&lt;/a&gt;，&lt;a href=&quot;http://jekyllcn.com/docs/&quot;&gt;jekyll&lt;/a&gt;，&lt;a href=&quot;https://github.com/xudailong/xudailong.github.io&quot;&gt;Theme&lt;/a&gt;，主题是一个大牛开源的，只需要根据他的&lt;a href=&quot;https://github.com/liubo11/xudailong.github.io/blob/master/README-zh-cn.md&quot;&gt;中文文档&lt;/a&gt;配置，基本可以完成搭建。
-
-&lt;h2 id=&quot;遇到的问题&quot;&gt;遇到的问题&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;
-    不蒜子的域名过期
-根据&lt;a href=&quot;http://ibruce.info/2015/04/04/busuanzi/&quot;&gt;不蒜子网站&lt;/a&gt;说明更改即可。
-  &lt;/li&gt;
-  &lt;li&gt;
-    百度统计
-需要在&lt;a href=&quot;https://tongji.baidu.com/web/welcome/products&quot;&gt;百度统计官网&lt;/a&gt;注册，更改_config.yml文件的配置，需要注意的是若网站1个月没有流量，可能失效。
-  &lt;/li&gt;
-  &lt;li&gt;
-    文档撰写
-文档存放在_posts目录，使用Markdown语言编写，可参考&lt;a href=&quot;https://www.runoob.com/markdown/md-tutorial.html&quot;&gt;RUNOOB&lt;/a&gt;的教程。
-  &lt;/li&gt;
-  &lt;li&gt;
-    文档摘要
-在&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt;中使用excerpt_separator来标记的，在本项目中使用的是四个连续空行
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;参考资料&quot;&gt;参考资料&lt;/h2&gt;
-
-&lt;a href=&quot;https://pandao.github.io/editor.md/&quot;&gt;MarkDown编辑器&lt;/a&gt;
-</description>
-        <pubDate>Thu, 01 Jul 2021 00:00:00 +0800</pubDate>
-        <link>http://localhost:4001/2021/07/01/blog-create/</link>
-        <guid isPermaLink="true">http://localhost:4001/2021/07/01/blog-create/</guid>
-        
-        <category>Blog</category>
-        
-        <category>Markdown</category>
-        
-        
-        <category>Blog</category>
         
       </item>
     

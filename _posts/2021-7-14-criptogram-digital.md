@@ -80,7 +80,7 @@ SSL位于传输层和应用层之间，应用层协议都可以基于SSL来保�
 
 4. 用户申请签发证书  
 (1) 用户需要签发证书，首先得有个密钥对，所以先创建密钥对，与步骤1一致  
-`keytool -genkey -alias userali1 -keysize 2048 -validity 365 -keyalg RSA -dname "CN=cn.lb.a" -keypass 123456 -storepass 123456 -keystore user1.p12 -storetype PKCS12`
+`keytool -genkey -alias userali1 -keysize 2048 -validity 365 -keyalg RSA -dname "CN=cn.lb.a" -keypass 123456 -storepass 123456 -keystore user1.p12 -storetype PKCS12`  
 (2) 用户提出申请，生成证书签发请求文件  
 `keytool -certreq -alias userali1 -file usercsr.csr -keystore user1.p12`
 

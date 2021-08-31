@@ -9,4 +9,34 @@ type: page
 * content
 {:toc}
 
-## 保留
+## 构建工具
+
+### Gradle
+
+### Maven
+
+### Bazel
+
+### Make
+
+### CMake
+
+## 系统
+
+### Linux
+
+### Android
+
+## 编程语言
+
+### Java
+
+### C
+
+### Python
+
+## Database
+
+### MapDb
+
+### MySQL

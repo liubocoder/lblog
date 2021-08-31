@@ -15,6 +15,6 @@ type: page
 
 偶尔搞下服务器的开发：后端java、前端vue
 
-最近研究SDN：控制器使用ONOS
+最近研究SDN：控制器选用ONOS
 
 主要编程语言：JAVA、C、JS+CSS+HTML

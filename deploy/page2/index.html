@@ -138,6 +138,90 @@
             
               <li>
                 <h2>
+                  <a class="post-link" href="/2021/07/08/netty-use/">Netty框架</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2021-07-08
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>liubo
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#java" title="Category: java" rel="category">java</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#netty" title="Tag: netty" rel="tag">netty</a>&nbsp;
+    
+        <a href="/tag/#socket" title="Tag: socket" rel="tag">socket</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+</ul>
+
+<h2 id="前言">前言</h2>
+<p>在讨论Netty之前需要了解下我们处理网络请求的方案</p>
+
+<ol>
+  <li>
+    <p>BIO
+同步阻塞，服务器调用accept阻塞等待请求，当请求到来时创建线程处理，主线程继续等待请求。</p>
+  </li>
+  <li>
+    <p>NIO
+异步非阻塞，ServerSocketChannel非阻塞模式，使用selector轮询各类事件。</p>
+  </li>
+  <li>
+    <p>AIO
+只需要关心buffer的读写事件</p>
+  </li>
+</ol>
+
+<p>上述方案使用原生API直接开发，流程比较繁琐，性能不好，并且容易出错，使用Netty可以简化流程，Netty中使用Handler串行执行，结构层次分明，逻辑清晰，并且一个客户端只注册在一个线程上，避免部分业务中出现并发问题。</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2021/07/08/netty-use/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
                   <a class="post-link" href="/2021/07/02/java-thread/">Java线程相关</a>
                 </h2>
                 <div class="label">
@@ -567,6 +651,8 @@ synchronized 是非公平锁，ReentrantLock通过带参构造公平锁</p>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2021/07/19/docker-base/">Docker基础</a></li>
+                    
                         <li><a href="/2021/07/14/web-vue-elui-form/">ElementUI表单使用</a></li>
                     
                         <li><a href="/2021/07/14/criptogram-digital/">数字签名</a></li>
@@ -584,8 +670,6 @@ synchronized 是非公平锁，ReentrantLock通过带参构造公平锁</p>
                         <li><a href="/2021/07/02/db-base/">数据库基础</a></li>
                     
                         <li><a href="/2021/07/01/build-bazel/">Bazel构建工具</a></li>
-                    
-                        <li><a href="/2021/07/01/blog-create/">创建一个属于自己的博客</a></li>
                     
                 </ul>
             </div>
@@ -710,6 +794,15 @@ synchronized 是非公平锁，ReentrantLock通过带参构造公平锁</p>
                         <a href="/category/#JavaScript" class="categories-list-item" cate="JavaScript">
                             <span class="name">
                                 JavaScript
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#后端" class="categories-list-item" cate="后端">
+                            <span class="name">
+                                后端
                             </span>
                             <span class="badge">1</span>
                         </a>
@@ -857,6 +950,13 @@ synchronized 是非公平锁，ReentrantLock通过带参构造公平锁</p>
                       
                       
                       <a href="/tag/#elementui" style="font-size: 9pt; color: #999;">elementui</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#docker" style="font-size: 9pt; color: #999;">docker</a>
                     
                 </div>
             </div>

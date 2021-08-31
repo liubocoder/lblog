@@ -279,7 +279,7 @@ PKCS#12 扩展名 .p12/.pfx</p>
   <li>
     <p>用户申请签发证书<br />
 (1) 用户需要签发证书，首先得有个密钥对，所以先创建密钥对，与步骤1一致<br />
-<code class="language-plaintext highlighter-rouge">keytool -genkey -alias userali1 -keysize 2048 -validity 365 -keyalg RSA -dname "CN=cn.lb.a" -keypass 123456 -storepass 123456 -keystore user1.p12 -storetype PKCS12</code>
+<code class="language-plaintext highlighter-rouge">keytool -genkey -alias userali1 -keysize 2048 -validity 365 -keyalg RSA -dname "CN=cn.lb.a" -keypass 123456 -storepass 123456 -keystore user1.p12 -storetype PKCS12</code><br />
 (2) 用户提出申请，生成证书签发请求文件<br />
 <code class="language-plaintext highlighter-rouge">keytool -certreq -alias userali1 -file usercsr.csr -keystore user1.p12</code></p>
   </li>
@@ -338,35 +338,6 @@ PKCS#12 扩展名 .p12/.pfx</p>
                     
                 
             
-                
-                    
-                
-            
-        
-            
-            
-        
-            
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
         
             
             
@@ -380,6 +351,13 @@ PKCS#12 扩展名 .p12/.pfx</p>
             
         
             
+            
+        
+            
+            
+                
+                    
+                
             
                 
                     
@@ -424,6 +402,20 @@ PKCS#12 扩展名 .p12/.pfx</p>
                 
                     
                 
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
             
                 
                     
