@@ -25,18 +25,23 @@ sudo docker run -d -it -p 8181:8181 --name onos gwsdn/onos:2.6.0
     -v 映射文件或目录，例如 -v /opt/conf/nginx.conf:/etc/xx.conf，注意宿主机地址不是‘/’或‘~/’开头，则是Volume机制
     -p 端口映射，默认是tcp端口  -p 80:8080/tcp，udp写为 -p 8181:8181/udp
     --net 映射网络 例如：host
+    --restart=always 总是保持启动，当docker启动时自动启动该容器，其他参数：
+        no 不重启
+        on-failure 退出状态非0时重启 加':n'，表示最多重启n次
+        unless-stopped 非主动停止时重启
+    --privileged=true 真实的root权限
 ```
 [Volume机制参考这里](https://docs.docker.com/storage/volumes/)
 
 
 
 
-3. 镜像备份 `docker save`
+3. 镜像备份 `docker save` 区别与export
 ```
 sudo docker save -o gwsdn-onos-2.6.0.tar gwsdn/onos:2.6.0
 ```
 
-4. 镜像导入 `docker load`
+4. 镜像导入 `docker load` 区别与import
 ```
 sudo docker load -i gwsdn-onos-2.6.0.tar
     -i 从文件导入
@@ -89,3 +94,5 @@ sudo install lazydocker /usr/local/bin/
 [Lazydocker发布版本](https://github.com/jesseduffield/lazydocker/releases)
 
 [Docker图形化管理工具](https://cloud.tencent.com/developer/article/1647274)
+
+[import/export与save/load区别](https://www.hangge.com/blog/cache/detail_2411.html)

@@ -14,3 +14,20 @@ javafx开发pc串口程序
 https://blog.csdn.net/long117long/article/details/111396120
 javafx  materaildesign库
 http://www.jfoenix.com/
+
+
+学习方向：
+
+Android应用
+AndroidFramwork
+Linux
+
+Spring
+SpringBoot
+OSGI
+
+
+java
+python
+C
+C++

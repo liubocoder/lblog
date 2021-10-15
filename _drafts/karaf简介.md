@@ -20,5 +20,4 @@ loki 存储主服务器
 promtail  代理，用于收集日志，发送给loki
 grafana  用于ui展示
 
-linux 工具 fzf  用于模糊搜索
-https://github.com/junegunn/fzf
+

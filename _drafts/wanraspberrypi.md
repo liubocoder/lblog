@@ -10,3 +10,8 @@ https://blog.csdn.net/weixin_44568917/article/details/107208980
 防火墙配置
 https://blog.csdn.net/weixin_43100629/article/details/82896163
 
+
+
+openWrt  KMS服务的配置
+https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=352844&page=1
+https://github.com/Dwarven/vlmcsd
