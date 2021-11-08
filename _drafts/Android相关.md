@@ -1,4 +1,5 @@
 
+https://developer.android.google.cn/
 
 Native开发
 
@@ -34,5 +35,26 @@ https://juejin.cn/post/6945610863730491422/
 
 android的博客 值的看看
 https://www.jianshu.com/u/7f26e9b13731
+https://blog.csdn.net/u011216417?t=1
+https://www.cnblogs.com/renhui/articles/14268203.html
+https://frank909.blog.csdn.net/?t=1
 measure layout draw
 https://www.cnblogs.com/tiger-wang-ms/p/6517048.html
+
+hack博主
+https://weishu.me/
+
+
+开源库
+https://www.cnblogs.com/pengmn/p/12891982.html
+
+
+
+android中用户
+ps -ef 查看所有进程
+一般u0_axx 代表用户0的
+https://blog.csdn.net/huilin9960/article/details/81530568
+
+
+检查模拟器 多开等方案
+https://github.com/lamster2018/EasyProtector.git
