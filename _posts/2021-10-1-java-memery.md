@@ -28,7 +28,7 @@ Oracle HotSpot, Oracle JRockit, IBM JVM
 ## JVM内存模型
 
 ![img](/assets/blog-img/java-memory-1-1.png)
-[图片出处]<https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWcyMDE4LmNuYmxvZ3MuY29tL2Jsb2cvMTQ4OTY2OS8yMDE4MTAvMTQ4OTY2OS0yMDE4MTAwOTE4NTUyNzMxNi0xNzA4NzkwOTc0LnBuZw?x-oss-process=image/format,png>
+[图片出处](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWcyMDE4LmNuYmxvZ3MuY29tL2Jsb2cvMTQ4OTY2OS8yMDE4MTAvMTQ4OTY2OS0yMDE4MTAwOTE4NTUyNzMxNi0xNzA4NzkwOTc0LnBuZw?x-oss-process=image/format,png)
 
 1. 方法区
 线程共享区域，存储已被虚拟机加载的类相关信息、常量、静态变量、即时编译器编译后的代码等。
@@ -55,17 +55,22 @@ Oracle HotSpot, Oracle JRockit, IBM JVM
 
 ## GC
 判断对象是可被回收的依据是“是否可达”，可达的根节点被称为GCROOTs，我理解的是方法区、虚拟机栈、本地方法栈持有了引用即可称为GCROOTs。
+
 GC的目标是对象，对象的持有者是引用，java中引用有四类
-强引用 FinalReference
-软引用 SoftReference
-弱引用 WeakReference
-虚引用 PhantomReference
+
+>- 强引用 FinalReference
+>- 软引用 SoftReference
+>- 弱引用 WeakReference
+>- 虚引用 PhantomReference
+
 除强引用是我们不能操作的之外，其他三类引用我们都可以使用到，一般可以结合ReferenceQueue使用，判断该引用isEnqueued()是否入队，表示已被gc掉。
+
     Hotspot的收集器有3种
     1) 单线程 serial collector
     2) 并行 parallel collector
     3) 并发 concurrent collector
     [详情参考](https://www.cnblogs.com/redcreen/archive/2011/05/04/2037029.html)
+
     HotspotGC操作类型
     1) YGC eden空间不足
     2) FGC old、perm等空间不足  可以由System.gc()触发

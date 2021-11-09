@@ -8,7 +8,7 @@
 /  存放的是系统级应用及库例如 /bin  /lib
 /usr  存放系统的扩展应用及库  /usr/bin  /usr/lib
 /usr/local  存放用户的应用及库  /usr/local/bin
-
+/etc 存放一些配置
 
 
 linux指令

@@ -25,6 +25,7 @@ sudo docker run -d -it -p 8181:8181 --name onos gwsdn/onos:2.6.0
     -v 映射文件或目录，例如 -v /opt/conf/nginx.conf:/etc/xx.conf，注意宿主机地址不是‘/’或‘~/’开头，则是Volume机制
     -p 端口映射，默认是tcp端口  -p 80:8080/tcp，udp写为 -p 8181:8181/udp
     --net 映射网络 例如：host
+    --ip 自定义网络设置自定义ip 例如：--ip 172.100.0.2
     --restart=always 总是保持启动，当docker启动时自动启动该容器，其他参数：
         no 不重启
         on-failure 退出状态非0时重启 加':n'，表示最多重启n次
@@ -63,6 +64,19 @@ sudo docker exec -it 84b623993841 /bin/bash
 ```
 docker stop $(docker ps  awk '{ print $1}' | tail -n +2)
 ```
+
+8. 创建自定义网段
+若需要组建一个测试的集群环境，可以创建自定义网络分配固定的ip地址
+```
+docker network create --subnet=172.100.0.0/16 mynetwork
+```
+
+## Docker端口不能访问，可以尝试如下方案
+>- 1.宿主机防火墙配置问题
+>- 2.设置ip转发net.ipv4.ip_forward = 1
+>- 3.云服务器的安全组
+>- 4.网卡冲突
+>- 5.尝试--net host 不使用-p
 
 ## Docker图形界面管理器
 我选用了Lazydocker，属于字符图形界面，可以鼠标或全键盘操作，最主要是可以在远程终端上使用，例如：SecureCRT。可按照如下步骤配置
