@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Juni和EasyMock的使用"
-categories: test java
-tags:  JUnit EasyMock Maven
+categories: 自动化测试 java
+tags:  jUnit easyMock maven
 author: liubo
 typora-root-url: ..
 ---

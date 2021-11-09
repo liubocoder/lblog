@@ -123,6 +123,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -135,6 +137,164 @@
         <small>一些个人的学习记录</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2021/07/10/test-tool/">Juni和EasyMock的使用</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2021-07-10
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>liubo
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#自动化测试" title="Category: 自动化测试" rel="category">自动化测试</a>&nbsp;
+    
+        <a href="/category/#java" title="Category: java" rel="category">java</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#jUnit" title="Tag: jUnit" rel="tag">jUnit</a>&nbsp;
+    
+        <a href="/tag/#easyMock" title="Tag: easyMock" rel="tag">easyMock</a>&nbsp;
+    
+        <a href="/tag/#maven" title="Tag: maven" rel="tag">maven</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#参考资料" id="markdown-toc-参考资料">参考资料</a></li>
+</ul>
+
+<h2 id="前言">前言</h2>
+<p>自动化测试工具</p>
+
+<h2 id="参考资料">参考资料</h2>
+
+<p><a href="https://blog.csdn.net/qq_41357569/article/details/85089818">Juni和EasyMock配合使用</a></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2021/07/10/test-tool/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2021/07/09/jemalloc-use/">jemalloc介绍</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2021-07-09
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>liubo
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#c/c++" title="Category: c/c++" rel="category">c/c++</a>&nbsp;
+    
+        <a href="/category/#优化" title="Category: 优化" rel="category">优化</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#netty" title="Tag: netty" rel="tag">netty</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <ul id="markdown-toc">
+  <li><a href="#jemalloc基本信息" id="markdown-toc-jemalloc基本信息">jemalloc基本信息</a></li>
+</ul>
+
+<h2 id="jemalloc基本信息">jemalloc基本信息</h2>
+
+<p>在学习Netty时，发现buffer引入缓冲池，其借用了jemalloc的思想；jemalloc在android5.1开始，成为libc默认的heap管理器。在这里搜索下jemalloc相关资料，以作记录。</p>
+
+<p>jemalloc使用一系列算法保证程序在申请和释放内存的高效稳定，主要有以下几个特点：</p>
+
+<ol>
+  <li>
+    <p>线程默认都有自己的私有缓存空间tcache，线程中分配内存都走这里，若未分配成功再走其他流程，线程内部的缓存空间中申请内存可以不加锁。</p>
+  </li>
+  <li>
+    <p>内存区重新规划，使用不同大小的分配单元</p>
+  </li>
+  <li>
+    <p>内存释放时，小内存合并为大内存，并判断是否需要缓存以供后续使用</p>
+  </li>
+</ol>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2021/07/09/jemalloc-use/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -279,6 +439,10 @@
 
 <h2 id="锁">锁</h2>
 
+<p>java中锁的实现分为两种：一种是synchronized关键字，一种是AbstractQueuedSynchronizer类，锁的核心就是如何管理竞争资源的线程。</p>
+
+<p>当然根据实际的锁的业务类型，分为如下几类。</p>
+
 <ol>
   <li>
     <p>偏向锁/轻量级锁/重量级锁
@@ -291,10 +455,6 @@
   <li>
     <p>共享锁/独占锁
 ReadWritLock</p>
-  </li>
-  <li>
-    <p>公平锁/非公平锁
-synchronized 是非公平锁，ReentrantLock通过带参构造公平锁</p>
   </li>
 </ol>
 
@@ -330,7 +490,7 @@ synchronized 是非公平锁，ReentrantLock通过带参构造公平锁</p>
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Database" title="Category: Database" rel="category">Database</a>
+        <a href="/category/#database" title="Category: database" rel="category">database</a>
     
   
 
@@ -347,7 +507,7 @@ synchronized 是非公平锁，ReentrantLock通过带参构造公平锁</p>
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Db基础" title="Tag: Db基础" rel="tag">Db基础</a>
+        <a href="/tag/#db基础" title="Tag: db基础" rel="tag">db基础</a>
     
   
 
@@ -405,7 +565,7 @@ synchronized 是非公平锁，ReentrantLock通过带参构造公平锁</p>
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Build" title="Category: Build" rel="category">Build</a>
+        <a href="/category/#build" title="Category: build" rel="category">build</a>
     
   
 
@@ -422,9 +582,9 @@ synchronized 是非公平锁，ReentrantLock通过带参构造公平锁</p>
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Bazel" title="Tag: Bazel" rel="tag">Bazel</a>&nbsp;
+        <a href="/tag/#bazel" title="Tag: bazel" rel="tag">bazel</a>&nbsp;
     
-        <a href="/tag/#Onos" title="Tag: Onos" rel="tag">Onos</a>
+        <a href="/tag/#onos" title="Tag: onos" rel="tag">onos</a>
     
   
 
@@ -454,176 +614,6 @@ synchronized 是非公平锁，ReentrantLock通过带参构造公平锁</p>
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2021/07/01/blog-create/">创建一个属于自己的博客</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2021-07-01
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>liubo
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Blog" title="Category: Blog" rel="category">Blog</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Blog" title="Tag: Blog" rel="tag">Blog</a>&nbsp;
-    
-        <a href="/tag/#Markdown" title="Tag: Markdown" rel="tag">Markdown</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <ul id="markdown-toc">
-  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
-  <li><a href="#遇到的问题" id="markdown-toc-遇到的问题">遇到的问题</a></li>
-  <li><a href="#参考资料" id="markdown-toc-参考资料">参考资料</a></li>
-</ul>
-
-<h2 id="前言">前言</h2>
-<p>很多人可能都有一种想法，写点东西记录下学习或生活，好记忆不如烂笔头，现在我们用博客来开启文字记忆。</p>
-
-<p>需要使用到的资源有：<a href="https://gitee.com/help/articles/4136">GiteePages</a>，<a href="http://jekyllcn.com/docs/">jekyll</a>，<a href="https://github.com/xudailong/xudailong.github.io">Theme</a>，主题是一个大牛开源的，只需要根据他的<a href="https://github.com/liubo11/xudailong.github.io/blob/master/README-zh-cn.md">中文文档</a>配置，基本可以完成搭建。</p>
-
-<h2 id="遇到的问题">遇到的问题</h2>
-<ol>
-  <li>
-    <p>不蒜子的域名过期
-根据<a href="http://ibruce.info/2015/04/04/busuanzi/">不蒜子网站</a>说明更改即可。</p>
-  </li>
-  <li>
-    <p>百度统计
-需要在<a href="https://tongji.baidu.com/web/welcome/products">百度统计官网</a>注册，更改_config.yml文件的配置，需要注意的是若网站1个月没有流量，可能失效。</p>
-  </li>
-  <li>
-    <p>文档撰写
-文档存放在_posts目录，使用Markdown语言编写，可参考<a href="https://www.runoob.com/markdown/md-tutorial.html">RUNOOB</a>的教程。</p>
-  </li>
-  <li>
-    <p>文档摘要
-在<code class="language-plaintext highlighter-rouge">_config.yml</code>中使用excerpt_separator来标记的，在本项目中使用的是四个连续空行</p>
-  </li>
-</ol>
-
-<h2 id="参考资料">参考资料</h2>
-
-<p><a href="https://pandao.github.io/editor.md/">MarkDown编辑器</a></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2021/07/01/blog-create/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2021/05/31/hello-my-blog/">测试博客</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2021-05-31
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>liubo
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#c1" title="Category: c1" rel="category">c1</a>&nbsp;
-    
-        <a href="/category/#c2" title="Category: c2" rel="category">c2</a>&nbsp;
-    
-        <a href="/category/#测试类别" title="Category: 测试类别" rel="category">测试类别</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#tag1" title="Tag: tag1" rel="tag">tag1</a>&nbsp;
-    
-        <a href="/tag/#tag2" title="Tag: tag2" rel="tag">tag2</a>&nbsp;
-    
-        <a href="/tag/#测试标签" title="Tag: 测试标签" rel="tag">测试标签</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <ul id="markdown-toc">
-  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
-</ul>
-
-<h2 id="前言">前言</h2>
-
-<p>这是一篇测试用的文章，主要测试博客中的一些功能是否正常
-<img src="/assets/blog-img/test-sample.png" alt="img" /></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2021/05/31/hello-my-blog/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -634,10 +624,10 @@ synchronized 是非公平锁，ReentrantLock通过带参构造公平锁</p>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">2/2</span>
+          <span class="page_number ">2/3</span>
           
-            <span class="next disable"><i class="fa fa-angle-right"></i></span>
-            <span class="next disable"><i class="fa fa-angle-double-right"></i></span>
+            <a href="/page3" class="next"><i class="fa fa-angle-right"></i></a>
+            <a href="/page3" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -650,6 +640,10 @@ synchronized 是非公平锁，ReentrantLock通过带参构造公平锁</p>
                     Recent Posts
                 </div>
                 <ul class="content-ul" recent>
+                    
+                        <li><a href="/2021/11/09/onos-swagger/">记录ONOS自动添加的swagger文档中文乱码问题</a></li>
+                    
+                        <li><a href="/2021/10/01/java-memery/">JVM内存模型</a></li>
                     
                         <li><a href="/2021/07/19/docker-base/">Docker基础</a></li>
                     
@@ -667,10 +661,6 @@ synchronized 是非公平锁，ReentrantLock通过带参构造公平锁</p>
                     
                         <li><a href="/2021/07/02/java-thread/">Java线程相关</a></li>
                     
-                        <li><a href="/2021/07/02/db-base/">数据库基础</a></li>
-                    
-                        <li><a href="/2021/07/01/build-bazel/">Bazel构建工具</a></li>
-                    
                 </ul>
             </div>
 
@@ -683,54 +673,27 @@ synchronized 是非公平锁，ReentrantLock通过带参构造公平锁</p>
                 <ul class="content-ul" cate>
                     
                     <li>
-                        <a href="/category/#c1" class="categories-list-item" cate="c1">
+                        <a href="/category/#blog" class="categories-list-item" cate="blog">
                             <span class="name">
-                                c1
+                                blog
                             </span>
                             <span class="badge">1</span>
                         </a>
                     </li>
                     
                     <li>
-                        <a href="/category/#c2" class="categories-list-item" cate="c2">
+                        <a href="/category/#build" class="categories-list-item" cate="build">
                             <span class="name">
-                                c2
+                                build
                             </span>
-                            <span class="badge">1</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
                     <li>
-                        <a href="/category/#测试类别" class="categories-list-item" cate="测试类别">
+                        <a href="/category/#database" class="categories-list-item" cate="database">
                             <span class="name">
-                                测试类别
-                            </span>
-                            <span class="badge">1</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#Blog" class="categories-list-item" cate="Blog">
-                            <span class="name">
-                                Blog
-                            </span>
-                            <span class="badge">1</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#Build" class="categories-list-item" cate="Build">
-                            <span class="name">
-                                Build
-                            </span>
-                            <span class="badge">1</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#Database" class="categories-list-item" cate="Database">
-                            <span class="name">
-                                Database
+                                database
                             </span>
                             <span class="badge">1</span>
                         </a>
@@ -741,7 +704,7 @@ synchronized 是非公平锁，ReentrantLock通过带参构造公平锁</p>
                             <span class="name">
                                 java
                             </span>
-                            <span class="badge">3</span>
+                            <span class="badge">4</span>
                         </a>
                     </li>
                     
@@ -764,9 +727,9 @@ synchronized 是非公平锁，ReentrantLock通过带参构造公平锁</p>
                     </li>
                     
                     <li>
-                        <a href="/category/#test" class="categories-list-item" cate="test">
+                        <a href="/category/#自动化测试" class="categories-list-item" cate="自动化测试">
                             <span class="name">
-                                test
+                                自动化测试
                             </span>
                             <span class="badge">1</span>
                         </a>
@@ -830,56 +793,35 @@ synchronized 是非公平锁，ReentrantLock通过带参构造公平锁</p>
                       
                       
                       
-                      <a href="/tag/#tag1" style="font-size: 9pt; color: #999;">tag1</a>
+                      <a href="/tag/#blog" style="font-size: 9pt; color: #999;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#tag2" style="font-size: 9pt; color: #999;">tag2</a>
+                      <a href="/tag/#markdown" style="font-size: 9pt; color: #999;">markdown</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#测试标签" style="font-size: 9pt; color: #999;">测试标签</a>
+                      <a href="/tag/#bazel" style="font-size: 18pt; color: #000;">bazel</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#Blog" style="font-size: 9pt; color: #999;">Blog</a>
+                      <a href="/tag/#onos" style="font-size: 18pt; color: #000;">onos</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#Markdown" style="font-size: 9pt; color: #999;">Markdown</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#Bazel" style="font-size: 9pt; color: #999;">Bazel</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#Onos" style="font-size: 9pt; color: #999;">Onos</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#Db基础" style="font-size: 9pt; color: #999;">Db基础</a>
+                      <a href="/tag/#db基础" style="font-size: 9pt; color: #999;">db基础</a>
                     
                       
                       
@@ -914,21 +856,21 @@ synchronized 是非公平锁，ReentrantLock通过带参构造公平锁</p>
                       
                       
                       
-                      <a href="/tag/#JUnit" style="font-size: 9pt; color: #999;">JUnit</a>
+                      <a href="/tag/#jUnit" style="font-size: 9pt; color: #999;">jUnit</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#EasyMock" style="font-size: 9pt; color: #999;">EasyMock</a>
+                      <a href="/tag/#easyMock" style="font-size: 9pt; color: #999;">easyMock</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#Maven" style="font-size: 9pt; color: #999;">Maven</a>
+                      <a href="/tag/#maven" style="font-size: 9pt; color: #999;">maven</a>
                     
                       
                       
@@ -957,6 +899,13 @@ synchronized 是非公平锁，ReentrantLock通过带参构造公平锁</p>
                       
                       
                       <a href="/tag/#docker" style="font-size: 9pt; color: #999;">docker</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#jvm" style="font-size: 9pt; color: #999;">jvm</a>
                     
                 </div>
             </div>

@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Bazel构建工具"
-categories: Build
-tags:  Bazel Onos
+categories: build
+tags:  bazel onos
 author: liubo
 typora-root-url: ..
 ---

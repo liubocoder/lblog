@@ -7,7 +7,7 @@
 
 # Site settings
 title: 刘波的学习记录
-brief-intro: Java Android C Coder
+brief-intro: Android Java C Coder
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://liubocode.gitee.io" # the base hostname & protocol for your site
 

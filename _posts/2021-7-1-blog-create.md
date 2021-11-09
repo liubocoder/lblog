@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "创建一个属于自己的博客"
-categories: Blog
-tags:  Blog Markdown
+categories: blog
+tags:  blog markdown
 author: liubo
 typora-root-url: ..
 ---

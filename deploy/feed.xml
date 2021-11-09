@@ -5,9 +5,61 @@
     <description></description>
     <link>http://localhost:4001/</link>
     <atom:link href="http://localhost:4001/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 19 Jul 2021 18:30:01 +0800</pubDate>
-    <lastBuildDate>Mon, 19 Jul 2021 18:30:01 +0800</lastBuildDate>
+    <pubDate>Tue, 09 Nov 2021 13:44:36 +0800</pubDate>
+    <lastBuildDate>Tue, 09 Nov 2021 13:44:36 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>记录ONOS自动添加的swagger文档中文乱码问题</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#问题&quot; id=&quot;markdown-toc-问题&quot;&gt;问题&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;问题&quot;&gt;问题&lt;/h2&gt;
+
+在使用onos的doc时，添加中文的注释会在swagger页面显示乱码，原因是自动生成的swagger配置文件中写入了错误编码格式的字符。
+&lt;img src=&quot;/assets/blog-img/build-onos-swagger-1-1.png&quot; alt=&quot;img&quot; /&gt;
+</description>
+        <pubDate>Tue, 09 Nov 2021 00:00:00 +0800</pubDate>
+        <link>http://localhost:4001/2021/11/09/onos-swagger/</link>
+        <guid isPermaLink="true">http://localhost:4001/2021/11/09/onos-swagger/</guid>
+        
+        <category>bazel</category>
+        
+        <category>onos</category>
+        
+        
+        <category>build</category>
+        
+      </item>
+    
+      <item>
+        <title>JVM内存模型</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#常见的jvm&quot; id=&quot;markdown-toc-常见的jvm&quot;&gt;常见的JVM&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;常见的jvm&quot;&gt;常见的JVM&lt;/h2&gt;
+
+PC上的JVM实现版本主要有三类
+
+Oracle HotSpot, Oracle JRockit, IBM JVM
+
+移动平台Android的Dalvik/ART
+
+我们最为关心的是JVM的内存模型，关系到业务运行的稳定性。
+以下基于Hotspot虚拟机
+</description>
+        <pubDate>Fri, 01 Oct 2021 00:00:00 +0800</pubDate>
+        <link>http://localhost:4001/2021/10/01/java-memery/</link>
+        <guid isPermaLink="true">http://localhost:4001/2021/10/01/java-memery/</guid>
+        
+        <category>jvm</category>
+        
+        
+        <category>java</category>
+        
+      </item>
     
       <item>
         <title>Docker基础</title>
@@ -30,6 +82,12 @@
  -t 终端
  -v 映射文件或目录，例如 -v /opt/conf/nginx.conf:/etc/xx.conf，注意宿主机地址不是‘/’或‘~/’开头，则是Volume机制
  -p 端口映射，默认是tcp端口  -p 80:8080/tcp，udp写为 -p 8181:8181/udp
+ --net 映射网络 例如：host
+ --restart=always 总是保持启动，当docker启动时自动启动该容器，其他参数：
+     no 不重启
+     on-failure 退出状态非0时重启 加':n'，表示最多重启n次
+     unless-stopped 非主动停止时重启
+ --privileged=true 真实的root权限
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
     &lt;a href=&quot;https://docs.docker.com/storage/volumes/&quot;&gt;Volume机制参考这里&lt;/a&gt;
   &lt;/li&gt;
@@ -162,14 +220,14 @@ DES : Data Encryption Standard，即数据加密标准，是一种使用密钥�
         <link>http://localhost:4001/2021/07/10/test-tool/</link>
         <guid isPermaLink="true">http://localhost:4001/2021/07/10/test-tool/</guid>
         
-        <category>JUnit</category>
+        <category>jUnit</category>
         
-        <category>EasyMock</category>
+        <category>easyMock</category>
         
-        <category>Maven</category>
+        <category>maven</category>
         
         
-        <category>test</category>
+        <category>自动化测试</category>
         
         <category>java</category>
         
@@ -259,6 +317,10 @@ jemalloc使用一系列算法保证程序在申请和释放内存的高效稳定
 
 &lt;h2 id=&quot;锁&quot;&gt;锁&lt;/h2&gt;
 
+java中锁的实现分为两种：一种是synchronized关键字，一种是AbstractQueuedSynchronizer类，锁的核心就是如何管理竞争资源的线程。
+
+当然根据实际的锁的业务类型，分为如下几类。
+
 &lt;ol&gt;
   &lt;li&gt;
     偏向锁/轻量级锁/重量级锁
@@ -272,10 +334,6 @@ jemalloc使用一系列算法保证程序在申请和释放内存的高效稳定
     共享锁/独占锁
 ReadWritLock
   &lt;/li&gt;
-  &lt;li&gt;
-    公平锁/非公平锁
-synchronized 是非公平锁，ReentrantLock通过带参构造公平锁
-  &lt;/li&gt;
 &lt;/ol&gt;
 </description>
         <pubDate>Fri, 02 Jul 2021 00:00:00 +0800</pubDate>
@@ -288,65 +346,6 @@ synchronized 是非公平锁，ReentrantLock通过带参构造公平锁
         
         
         <category>java</category>
-        
-      </item>
-    
-      <item>
-        <title>数据库基础</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#参考资料&quot; id=&quot;markdown-toc-参考资料&quot;&gt;参考资料&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;参考资料&quot;&gt;参考资料&lt;/h2&gt;
-mysql常用基本指令
-&lt;a href=&quot;https://blog.csdn.net/weixin_42368489/article/details/82813893&quot;&gt;https://blog.csdn.net/weixin_42368489/article/details/82813893&lt;/a&gt;
-
-服务器相关资料
-&lt;a href=&quot;https://www.pomit.cn/index.html&quot;&gt;https://www.pomit.cn/index.html&lt;/a&gt;
-
-mysql与postgreSql比较
-&lt;a href=&quot;https://www.biaodianfu.com/mysql-vs-postgresql.html&quot;&gt;https://www.biaodianfu.com/mysql-vs-postgresql.html&lt;/a&gt;
-
-数据库的博客
-&lt;a href=&quot;https://tonydong.blog.csdn.net&quot;&gt;https://tonydong.blog.csdn.net&lt;/a&gt;
-</description>
-        <pubDate>Fri, 02 Jul 2021 00:00:00 +0800</pubDate>
-        <link>http://localhost:4001/2021/07/02/db-base/</link>
-        <guid isPermaLink="true">http://localhost:4001/2021/07/02/db-base/</guid>
-        
-        <category>Db基础</category>
-        
-        
-        <category>Database</category>
-        
-      </item>
-    
-      <item>
-        <title>Bazel构建工具</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#前言&quot; id=&quot;markdown-toc-前言&quot;&gt;前言&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#bazel安装&quot; id=&quot;markdown-toc-bazel安装&quot;&gt;Bazel安装&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
-Bazel是Google开源的构建工具，原生支持java、C++的编译，开源社区也有支持其他语言的编译的rule。本文结合了自身实践过程来学习bazel。
-
-&lt;h2 id=&quot;bazel安装&quot;&gt;Bazel安装&lt;/h2&gt;
-bazelisk 是bazel的版本管理工具，不同版本的onos使用了不同版本的bazel，因此我们在编译onos的时候bazelisk会自动下载对应版本的bazel进行编译。
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget https://github.com/bazelbuild/bazelisk/releases/download/v1.4.0/bazelisk-linux-amd64
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Thu, 01 Jul 2021 00:00:00 +0800</pubDate>
-        <link>http://localhost:4001/2021/07/01/build-bazel/</link>
-        <guid isPermaLink="true">http://localhost:4001/2021/07/01/build-bazel/</guid>
-        
-        <category>Bazel</category>
-        
-        <category>Onos</category>
-        
-        
-        <category>Build</category>
         
       </item>
     

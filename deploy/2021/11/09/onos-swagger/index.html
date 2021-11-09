@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>常见加密算法</title>
-    <meta name="description" content="  前言  对称加密算法          DES      前言在网络通信中，信息加密是最基本的信息安全策略对称加密算法其特点是加密和解密使用相同的密钥DESDES : Data Encryption Standard，即数据加密标准，是一种使用密钥加密的块算法，1977年被美国联邦政府的国家标准局确定为联邦资...">
+    <title>记录ONOS自动添加的swagger文档中文乱码问题</title>
+    <meta name="description" content="  问题问题在使用onos的doc时，添加中文的注释会在swagger页面显示乱码，原因是自动生成的swagger配置文件中写入了错误编码格式的字符。">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css">
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://localhost:4001/2021/07/12/criptogram/">
+    <link rel="canonical" href="http://localhost:4001/2021/11/09/onos-swagger/">
     <link rel="alternate" type="application/rss+xml" title="刘波的学习记录" href="http://localhost:4001/feed.xml ">
 
 
@@ -131,11 +131,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>常见加密算法</h1>
+        <h1>记录ONOS自动添加的swagger文档中文乱码问题</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2021-07-12
+                <i class="fa fa-calendar"></i>2021-11-09
             </div>
 
             <div class="label-card">
@@ -158,7 +158,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#加密算法" title="Category: 加密算法" rel="category">加密算法</a>
+        <a href="/category/#build" title="Category: build" rel="category">build</a>
     
   
 
@@ -175,6 +175,12 @@
   <i class="fa fa-tags"></i>
   
     
+        <!--a href="/tag/#bazel" title="Tag: bazel" rel="tag">bazel</a-->
+        <a href="/tag/#bazel" title="Tag: bazel" rel="tag">bazel</a>&nbsp;
+    
+        <!--a href="/tag/#onos" title="Tag: onos" rel="tag">onos</a-->
+        <a href="/tag/#onos" title="Tag: onos" rel="tag">onos</a>
+    
   
 
 </span>
@@ -185,113 +191,43 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
-  <li><a href="#对称加密算法" id="markdown-toc-对称加密算法">对称加密算法</a>    <ul>
-      <li><a href="#des" id="markdown-toc-des">DES</a></li>
-      <li><a href="#aes" id="markdown-toc-aes">AES</a></li>
-      <li><a href="#sm4" id="markdown-toc-sm4">SM4</a></li>
-    </ul>
-  </li>
-  <li><a href="#非对称加密算法" id="markdown-toc-非对称加密算法">非对称加密算法</a>    <ul>
-      <li><a href="#rsa" id="markdown-toc-rsa">RSA</a></li>
-      <li><a href="#ecc" id="markdown-toc-ecc">ECC</a></li>
-      <li><a href="#dsa" id="markdown-toc-dsa">DSA</a></li>
-      <li><a href="#sm2" id="markdown-toc-sm2">SM2</a></li>
-    </ul>
-  </li>
-  <li><a href="#加密模式" id="markdown-toc-加密模式">加密模式</a></li>
-  <li><a href="#填充模式" id="markdown-toc-填充模式">填充模式</a></li>
-  <li><a href="#摘要算法" id="markdown-toc-摘要算法">摘要算法</a>    <ul>
-      <li><a href="#md5" id="markdown-toc-md5">MD5</a></li>
-      <li><a href="#安全散列算法-sha" id="markdown-toc-安全散列算法-sha">安全散列算法 SHA</a></li>
-      <li><a href="#sm3" id="markdown-toc-sm3">SM3</a></li>
-    </ul>
-  </li>
-  <li><a href="#密钥协商" id="markdown-toc-密钥协商">密钥协商</a></li>
-  <li><a href="#参考资料" id="markdown-toc-参考资料">参考资料</a></li>
+  <li><a href="#问题" id="markdown-toc-问题">问题</a></li>
+  <li><a href="#定位问题原因" id="markdown-toc-定位问题原因">定位问题原因</a></li>
+  <li><a href="#解决问题" id="markdown-toc-解决问题">解决问题</a></li>
 </ul>
 
-<h2 id="前言">前言</h2>
-<p>在网络通信中，信息加密是最基本的信息安全策略</p>
+<h2 id="问题">问题</h2>
 
-<h2 id="对称加密算法">对称加密算法</h2>
-<p>其特点是加密和解密使用相同的密钥</p>
+<p>在使用onos的doc时，添加中文的注释会在swagger页面显示乱码，原因是自动生成的swagger配置文件中写入了错误编码格式的字符。
+<img src="/assets/blog-img/build-onos-swagger-1-1.png" alt="img" /></p>
 
-<h3 id="des">DES</h3>
-<p>DES : Data Encryption Standard，即数据加密标准，是一种使用密钥加密的块算法，1977年被美国联邦政府的国家标准局确定为联邦资料处理标准（FIPS），并授权在非密级政府通信中使用，随后该算法在国际上广泛流传开来。</p>
+<h2 id="定位问题原因">定位问题原因</h2>
 
-<p>有个升级版本DES3，相当于进行3次数据加密。其安全性能不高，在我们的业务中很少使用。</p>
+<p>查阅onos源码，发现该配置文件是项目中一个工具模块在编译时自动生成，路径/yourproject/tools/build/swagger</p>
 
-<h3 id="aes">AES</h3>
-<p>AES : Advanced Encryption Standard, 高级加密标准 .在密码学中又称Rijndael加密法，是美国联邦政府采用的一种区块加密标准。这个标准用来替代原先的DES，已经被多方分析且广为全世界所使用。</p>
+<p><img src="/assets/blog-img/build-onos-swagger-2-1.png" alt="img" /></p>
 
-<p>AES根据密钥长度有三个版本：AES128、AES192、AES256，不过分组长度均为128位。目前在业务中使用较多。</p>
+<p>源码是使用qdox工具，将接口类中的注释信息读取出来，按照既定的格式解析生成swagger.json配置文件，我们能确定java文件肯定是UTF-8格式，
+因此只有执行时读取中文的时候jvm字符集不兼容导致的（排除javac，javac不识别的字符编码会直接编译出错）</p>
 
-<h3 id="sm4">SM4</h3>
-<p>SM4是我们国家推出的一种分组密码标准，密钥和分组长度均为128位。</p>
+<p><img src="/assets/blog-img/build-onos-swagger-2-2.png" alt="img" /></p>
 
-<h2 id="非对称加密算法">非对称加密算法</h2>
-<p>加密和解密使用不同密钥，这两个密钥是成对的，分为公钥和私钥，一般是公钥加密私钥解密，当然私钥也是可以加密然后公钥解密，但是私钥加密相对性能更低，因此私钥用于加密数据的摘要信息，防止数据被篡改。</p>
+<p>为了再次确认，我在SwaggerGenerator.java中添加打印，打印当前虚拟机的默认字符集<code class="language-plaintext highlighter-rouge">Charset.defaultCharset()</code>，发现默认字符集是
+US-ASCII，再次印证上面的推断。</p>
 
-<h3 id="rsa">RSA</h3>
-<p>RSA算法由Rivest、Shamir、Adleman于1978年首次发表，也是迄今使用最为广泛的加密算法，已被 ISO 推荐为公钥数据加密标准。</p>
+<h2 id="解决问题">解决问题</h2>
 
-<h3 id="ecc">ECC</h3>
-<p>ECC 也是一种 非对称加密算法，主要优势是在某些情况下，它比其他的方法使用更小的密钥（例如：RSA），并提供相当的或更高等级的安全级别。不过一个缺点是加密和解密操作的实现比其他机制 耗时更长。</p>
+<p>知道问题原因后，需要查看执行这段代码的地方在哪儿，在/yourproject/tools/build/bazel/osgi_java_library.bzl文件中，一个自定义rule</p>
 
-<h3 id="dsa">DSA</h3>
-<p>DSA是一种用于数字签名算法。</p>
+<p><img src="/assets/blog-img/build-onos-swagger-3-1.png" alt="img" /></p>
 
-<h3 id="sm2">SM2</h3>
-<p>是我们国家发布非对称加密算法，全称“椭圆曲线算法”。</p>
+<p>在命令实现的地方_swagger_json_impl，ctx.actions.run添加环境变量<code class="language-plaintext highlighter-rouge">env = {"_JAVA_OPTIONS":"-Dfile.encoding=UTF-8"}</code>，如下图所示</p>
 
-<h2 id="加密模式">加密模式</h2>
+<p><img src="/assets/blog-img/build-onos-swagger-3-2.png" alt="img" /></p>
 
-<p>分组每一组加密的结果与后续组加密过程的影响，可以将分为ECB模式、CBC模式、CFB模式、OFB模式、CTR模式。</p>
+<p>再次编译后，可以看到又出现可爱的中文了 :)</p>
 
-<p>业务中常用ECB模式，可以并行加密，效率要高得多。</p>
-
-<h2 id="填充模式">填充模式</h2>
-<p>NoPadding、ZerosPadding、PKCS7Padding、PKCS5Padding、ISO10126Padding</p>
-
-<ol>
-  <li>NoPadding 表示不能完整分组时会抛异常</li>
-  <li>ZerosPadding 最后一个分组一定要用补零，就算完整分组也要开个分组填充0，也就是说只能是’\0’结尾</li>
-  <li>PKCS7Padding 分组少几个数据就填充几个数据，最后一个一定为填充的位数，若刚好对齐，则填充一个块长度的数据，每位都是块的长度</li>
-  <li>PKCS5Padding PKCS7Padding的子集，块大小固定为8字节，AES是16字节所以是不支持PKCS5Padding，若提及PKCS5Padding应该是指PKCS7Padding</li>
-  <li>ISO10126Padding 填充随机数，最后一位是需要填充的位数</li>
-</ol>
-
-<h2 id="摘要算法">摘要算法</h2>
-<p>广泛应用在数字签名、消息认证、数据完整性检测等。</p>
-
-<h3 id="md5">MD5</h3>
-<p>使用512位分组来处理输入信息，每个分组划分为16个32位子分组，输出4个32位分组，将这4个分组级联后生产128位的散列值。</p>
-
-<p>MD5一般用16进制表示，结果是32位的字符串<br />
-例如：bea70ab6645facb8742e8a50d9d57248，也有取其9到24位的字符：645facb8742e8a50。</p>
-
-<p>业务中也有加盐或取多次MD5的方式增加碰撞难度。</p>
-
-<h3 id="安全散列算法-sha">安全散列算法 SHA</h3>
-<p>目前SHA有4个版本，SHA0、SHA1、SHA2、SHA3，其中SHA0已废弃</p>
-<ol>
-  <li>SHA1 使用的是160位哈希值作为输出</li>
-  <li>SHA2 输出的长度可变，有多种类型SHA-224 SHA-256 SHA-384 SHA-512，SHA-256使用较为广泛</li>
-  <li>SHA3 是基于SHA2的升级版本，与SHA2一样有多种长度的输出</li>
-</ol>
-
-<h3 id="sm3">SM3</h3>
-<p>SM3是我国公布的商用密码杂凑算法标准，是SHA-256基础上改进实现的一种算法。</p>
-
-<h2 id="密钥协商">密钥协商</h2>
-<p>经典的密钥协商算法DH（Diffie-Hellman），通常与ECC算法协同使用ECDH。</p>
-
-<h2 id="参考资料">参考资料</h2>
-
-<p><a href="https://blog.csdn.net/weixin_41745909/article/details/102807092">分组加密算法加密模式</a></p>
-
-<p><a href="https://www.cnblogs.com/it88-laobing/p/14912573.html">Diffie-Hellman密钥协商算法</a></p>
+<p><img src="/assets/blog-img/build-onos-swagger-3-3.png" alt="img" /></p>
 
         </article>
         <hr>
@@ -301,62 +237,114 @@
             
             
                 
-            
+                    
+                
+                    
                 
             
         
             
             
                 
-            
-        
-            
-            
+                    
+                
+                    
                 
             
         
             
             
                 
+                    
+                
+                    
+                
             
+                
+                    
+                
+                    
                 
             
         
             
             
                 
-            
-        
-            
-            
+                    
                 
-            
-                
-            
+                    
                 
             
         
             
             
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
                 
             
         
             
             
                 
-            
+                    
+                
+                    
                 
             
         
             
             
                 
+                    
+                
+                    
+                
             
+                
+                    
+                
+                    
                 
             
         
             
             
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
                 
             
         
@@ -365,13 +353,11 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2021/07/10/test-tool/">Juni和EasyMock的使用</a></p>
+        <p><strong>上一篇</strong> <a href="/2021/10/01/java-memery/">JVM内存模型</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/2021/07/14/criptogram-digital/">数字签名</a></p>
         
     </div>
 </div>
