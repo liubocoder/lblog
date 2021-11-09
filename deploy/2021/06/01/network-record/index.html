@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>搭建VPN服务器</title>
-    <meta name="description" content="  需求  准备工具需求有时候需要查阅资料，不得不借助各种梯子，都不是很稳定，风险不能自己掌控，很难受。。于是想用openvpn自己搭建一个。准备工具1. 云服务器，可以买阿里云或者腾讯云，注意是否有跨境需求决定服务器位置2. 云服务器上安装docker和openvpn3. 客户端linux使用openvpn，w...">
+    <title>记录一些网络知识</title>
+    <meta name="description" content="  抓包抓包  linux tcpdump     示例： tcpdump -D 列举端口信息 tcpdump -i eth0 -nn -XX  ip xx and port 123 -i eth0 网卡eth0 -nn 所有报文转数字 -XX输出包的头部数据，会以16进制和ASCII两种方式同时输出，更详细  ...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css">
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://localhost:4001/2021/04/23/server-vpn/">
+    <link rel="canonical" href="http://localhost:4001/2021/06/01/network-record/">
     <link rel="alternate" type="application/rss+xml" title="刘波的学习记录" href="http://localhost:4001/feed.xml ">
 
 
@@ -131,11 +131,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>搭建VPN服务器</h1>
+        <h1>记录一些网络知识</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2021-04-23
+                <i class="fa fa-calendar"></i>2021-06-01
             </div>
 
             <div class="label-card">
@@ -158,8 +158,6 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#后端" title="Category: 后端" rel="category">后端</a>&nbsp;
-    
         <a href="/category/#网络" title="Category: 网络" rel="category">网络</a>
     
   
@@ -177,12 +175,6 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#openvpn" title="Tag: openvpn" rel="tag">openvpn</a-->
-        <a href="/tag/#openvpn" title="Tag: openvpn" rel="tag">openvpn</a>&nbsp;
-    
-        <!--a href="/tag/#docker" title="Tag: docker" rel="tag">docker</a-->
-        <a href="/tag/#docker" title="Tag: docker" rel="tag">docker</a>
-    
   
 
 </span>
@@ -193,104 +185,102 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#需求" id="markdown-toc-需求">需求</a></li>
-  <li><a href="#准备工具" id="markdown-toc-准备工具">准备工具</a></li>
-  <li><a href="#使用脚本配置服务器" id="markdown-toc-使用脚本配置服务器">使用脚本配置服务器</a></li>
-  <li><a href="#客户端中使用" id="markdown-toc-客户端中使用">客户端中使用</a></li>
+  <li><a href="#抓包" id="markdown-toc-抓包">抓包</a></li>
+  <li><a href="#路由相关" id="markdown-toc-路由相关">路由相关</a>    <ul>
+      <li><a href="#linux路由配置" id="markdown-toc-linux路由配置">linux路由配置</a></li>
+      <li><a href="#windows路由配置" id="markdown-toc-windows路由配置">windows路由配置</a></li>
+    </ul>
+  </li>
+  <li><a href="#openvpn客户端启动后会修改默认路由" id="markdown-toc-openvpn客户端启动后会修改默认路由">openvpn客户端启动后会修改默认路由</a></li>
+  <li><a href="#ssl" id="markdown-toc-ssl">SSL</a></li>
+  <li><a href="#wifi-wpa2-psk握手过程" id="markdown-toc-wifi-wpa2-psk握手过程">wifi wpa2-psk握手过程</a></li>
+  <li><a href="#一些网络工具" id="markdown-toc-一些网络工具">一些网络工具</a></li>
   <li><a href="#参考资料" id="markdown-toc-参考资料">参考资料</a></li>
 </ul>
 
-<h2 id="需求">需求</h2>
-<p>有时候需要查阅资料，不得不借助各种梯子，都不是很稳定，风险不能自己掌控，很难受。。于是想用openvpn自己搭建一个。</p>
-
-<h2 id="准备工具">准备工具</h2>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. 云服务器，可以买阿里云或者腾讯云，注意是否有跨境需求决定服务器位置
-2. 云服务器上安装docker和openvpn
-3. 客户端linux使用openvpn，windows使用OpenVpnGUI，android上使用OpenVpnAPP
-</code></pre></div></div>
-
-<h2 id="使用脚本配置服务器">使用脚本配置服务器</h2>
-<p>便于后续服务器迁移，使用脚本进行配置</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/sh
-#配置文件存放目录
-DIR="/root/openvpn/ovpn-data"
-#docker 容器名称
-NAME="openvpn"
-#端口
-PORT=yourCustomPort
-#服务器域名或IP
-DSTIP=yourServerIp or domainName
-#udp or tcp
-PROTO=udp
-
-function main {
-    case $1 in 
-        "setup")
-            rm ${DIR} -rf
-            mkdir -p ${DIR}
-            docker run -v ${DIR}:/etc/openvpn --rm kylemanna/openvpn ovpn_genconfig -u ${PROTO}://${DSTIP}
-            docker run -v ${DIR}:/etc/openvpn --rm -it kylemanna/openvpn ovpn_initpki
-            sed "s/port .*/port ${PORT}/" -i ${DIR}/openvpn.conf
-            sed "s/declare -x OVPN_PORT=.*/declare -x OVPN_PORT=${PORT}/" -i ${DIR}/ovpn_env.sh
-        return
-        ;;
-        "run")
-            docker stop ${NAME} &gt;/dev/null 2&gt;&amp;1
-            docker rm ${NAME} &gt;/dev/null 2&gt;&amp;1
-            sed "s/port .*/port ${PORT}/" -i ${DIR}/openvpn.conf
-            sed "s/declare -x OVPN_PORT=.*/declare -x OVPN_PORT=${PORT}/" -i ${DIR}/ovpn_env.sh
-            docker run --name ${NAME} -v ${DIR}:/etc/openvpn -d --net host --cap-add=NET_ADMIN kylemanna/openvpn
-        return
-        ;;
-        "product")
-            docker run -v ${DIR}:/etc/openvpn --rm -it kylemanna/openvpn easyrsa build-client-full $2 nopass
-            docker run -v ${DIR}:/etc/openvpn --rm kylemanna/openvpn ovpn_getclient $2&gt; $2.ovpn
-        return
-        ;;
-        "log")
-                docker exec ${NAME} cat /tmp/openvpn-status.log
-                return
-        ;;
-    esac
-
-    echo "err cmd $1"
-}
-</code></pre></div></div>
-
-<p>直接将脚本保存到xx文件中</p>
-<blockquote>
-  <ul>
-    <li><code class="language-plaintext highlighter-rouge">./xx setup</code>创建vpn相关配置，这一步有很多需要输入名字或密码的地方，注意牢记密码，不要输错了</li>
-    <li><code class="language-plaintext highlighter-rouge">./xx run</code> 运行服务器</li>
-    <li><code class="language-plaintext highlighter-rouge">./xx product</code> 创建客户端密钥配置，注意需要输入密码</li>
-    <li><code class="language-plaintext highlighter-rouge">./xx log</code> 查看服务器日志</li>
-  </ul>
-</blockquote>
-
-<h2 id="客户端中使用">客户端中使用</h2>
+<h2 id="抓包">抓包</h2>
 
 <ol>
-  <li>linux中使用命令
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo openvpn --daemon --config xx.ovpn
+  <li>linux tcpdump
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 示例：
+ tcpdump -D 列举端口信息
+ tcpdump -i eth0 -nn -XX  ip xx and port 123
+ -i eth0 网卡eth0
+ -nn 所有报文转数字
+ -XX输出包的头部数据，会以16进制和ASCII两种方式同时输出，更详细
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>windows导入配置即可</p>
+    <p>gui工具</p>
 
-    <p><img src="/assets/blog-img/server-vpn-1-2.png" alt="img" /></p>
-  </li>
-  <li>
-    <p>android也直接导入配置</p>
-
-    <p><img src="/assets/blog-img/server-vpn-1-1.png" alt="img" /></p>
+    <p>gui的抓包工具可以用wireshark，是一款非常牛的开源软件，默默念一句感谢开源世界。</p>
   </li>
 </ol>
 
+<h2 id="路由相关">路由相关</h2>
+
+<p>路由是网络层上的概念，指从某个接口出发到另外一个接口的路径描述，以下对linux和windows上的路由命令简单使用。</p>
+
+<p>默认路由的概念</p>
+
+<p>当目标主机的 IP 地址或网络不在路由表中时，数据包就被发送到默认路由（默认网关）上。默认路由的 Destination 是 default 或 0.0.0.0。</p>
+
+<h3 id="linux路由配置">linux路由配置</h3>
+
+<p>linux路由主要是route命令的使用</p>
+
+<p>列举路由</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>route -n
+</code></pre></div></div>
+<p>添加路由</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>route add -net 10.0.0.10 netmask 255.255.255.255 gw 10.139.128.1 dev eth0
+</code></pre></div></div>
+<p>删除路由</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>route del -net 224.0.0.0 netmask 240.0.0.0
+</code></pre></div></div>
+
+<h3 id="windows路由配置">windows路由配置</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>示例：
+打印路由
+route print
+打印接口列表
+route print -4
+
+添加路由  -p属性永久添加
+route add 0.0.0.0 mask 0.0.0.0 10.0.0.1 metric 3 if 12
+    metric 跳数，约小优先级约高
+    if 接口，使用route print -4查看
+
+修改默认路由的网关为10.0.0.1，只能修改网关和跃点数
+route change 0.0.0.0 mask 0.0.0.0 10.0.0.1
+
+删除网关为10.0.0.1的默认路由
+route delete 0.0.0.0 10.0.0.1
+
+windows网卡的跃点数一般配置的自动跃点数，可以在网卡属性ipv4或ipv6的高级属性中修改成自定义的跃点数
+</code></pre></div></div>
+
+<h2 id="openvpn客户端启动后会修改默认路由">openvpn客户端启动后会修改默认路由</h2>
+<p><img src="/assets/blog-img/net-route-1-1.png" alt="img" /></p>
+
+<p>将不认识的ip报文都转到tun0，内部再转向vpn服务器地址，从enp1s0网卡发出</p>
+
+<h2 id="ssl">SSL</h2>
+<p>安全套接字层，一般是和http结合成https
+区别SSH，SSH是由服务端和客户端组成连接终端，主要用于执行RPC，SSH基于SSL保障通信的安全。</p>
+
+<h2 id="wifi-wpa2-psk握手过程">wifi wpa2-psk握手过程</h2>
+<p><a href="https://blog.csdn.net/Mr_gui_/article/details/113403996">https://blog.csdn.net/Mr_gui_/article/details/113403996</a>
+有机会再自己试试看</p>
+
+<h2 id="一些网络工具">一些网络工具</h2>
+<p><a href="https://www.163.com/dy/article/FBNQV4350511RU8P.html">https://www.163.com/dy/article/FBNQV4350511RU8P.html</a></p>
+
 <h2 id="参考资料">参考资料</h2>
 
-<p><a href="https://github.com/kylemanna/docker-openvpn">https://github.com/kylemanna/docker-openvpn</a></p>
+<p><a href="https://www.cnblogs.com/f-ck-need-u/p/7064286.html">tcpdump资料</a></p>
 
-<p><a href="https://github.com/OpenVPN/openvpn">https://github.com/OpenVPN/openvpn</a></p>
+<p><a href="https://blog.csdn.net/kikajack/article/details/80457841">linux路由</a></p>
 
         </article>
         <hr>
@@ -300,69 +290,29 @@ function main {
             
             
                 
-                    
-                
-                    
-                
             
-                
-                    
-                
-                    
                 
             
         
             
             
                 
-                    
-                
-                    
+            
+        
+            
+            
                 
             
         
             
             
                 
-                    
-                
-                    
-                        
-                        <h2 id="similar_posts">Similar Posts</h2>
-                        <ul>
-                        
-                        <li class="relatedPost">
-                            <a href="/2021/07/19/docker-base/">Docker基础
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
+            
                 
             
         
             
             
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
                 
             
         
@@ -372,77 +322,43 @@ function main {
             
             
                 
-                    
-                
-                    
-                
             
                 
-                    
-                
-                    
-                
             
-                
-                    
-                
-                    
                 
             
         
             
             
                 
-                    
+            
+        
+            
+            
                 
-                    
+            
                 
             
         
             
             
                 
-                    
-                
-                    
-                
             
-                
-                    
-                
-                    
                 
             
         
-            
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-        
-            </ul>
         
 
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2020/05/24/blog-create/">创建一个属于自己的博客</a></p>
+        <p><strong>上一篇</strong> <a href="/2021/04/23/server-vpn/">搭建VPN服务器</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/2021/06/01/network-record/">记录一些网络知识</a></p>
+        <p><strong>下一篇</strong> <a href="/2021/07/01/build-bazel/">Bazel构建工具</a></p>
         
     </div>
 </div>
@@ -460,8 +376,6 @@ function main {
                     Content
                 </div>
                 <ul id="content-side" class="content-ul">
-                    
-                    <li><a href="#similar_posts">Similar Posts</a></li>
                     
                     <!-- <li><a href="#comments">Comments</a></li> -->
                 </ul>

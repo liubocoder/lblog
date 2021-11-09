@@ -5,8 +5,8 @@
     <description></description>
     <link>http://localhost:4001/</link>
     <atom:link href="http://localhost:4001/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 09 Nov 2021 15:28:47 +0800</pubDate>
-    <lastBuildDate>Tue, 09 Nov 2021 15:28:47 +0800</lastBuildDate>
+    <pubDate>Tue, 09 Nov 2021 15:53:45 +0800</pubDate>
+    <lastBuildDate>Tue, 09 Nov 2021 15:53:45 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -155,12 +155,6 @@ Oracle HotSpot, Oracle JRockit, IBM JVM
     &lt;li&gt;保证服务器是合法的，可认证的&lt;/li&gt;
   &lt;/ol&gt;
 &lt;/blockquote&gt;
-
-其中最主要的是保证服务器的合法性，其他的都可以在确保服务器合法后通过协商密钥加密传输数据来解决，而保证服务器合法性的根本是证书，证书的基础就是数字签名。
-
-当然证书是验证证书持有者的合法性，所以不仅能验证服务器也能验证客户端，例如：银行的U盾用于验证客户端的合法性。
-
-数字签名的核心还是使用的是非对称加密算法的私钥对需要签名的数据进行加密处理。
 </description>
         <pubDate>Wed, 14 Jul 2021 00:00:00 +0800</pubDate>
         <link>http://localhost:4001/2021/07/14/criptogram-digital/</link>
