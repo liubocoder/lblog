@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>搭建VPN服务器</title>
-    <meta name="description" content="  需求  准备工具需求有时候需要查阅资料，不得不借助各种梯子，都不是很稳定，风险不能自己掌控，很难受。。于是想用openvpn自己搭建一个。准备工具1. 云服务器，可以买阿里云或者腾讯云，注意是否有跨境需求决定服务器位置2. 云服务器上安装docker和openvpn3. 客户端linux使用openvpn，w...">
+    <title>搭建NPV服务器</title>
+    <meta name="description" content="  需求  准备工具需求有时候需要查阅资料，不得不借助各种工具，都不是很稳定，风险不能自己掌控，很难受。。于是想用’opennpv’自己搭建一个，为了提交这篇文章所有改了所有的为opennpv。准备工具1. 云服务器，可以买阿里云或者腾讯云，注意是否有跨境需求决定服务器位置2. 云服务器上安装docker和ope...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
@@ -131,7 +131,7 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>搭建VPN服务器</h1>
+        <h1>搭建NPV服务器</h1>
         <div class="label">
 
             <div class="label-card">
@@ -177,8 +177,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#openvpn" title="Tag: openvpn" rel="tag">openvpn</a-->
-        <a href="/tag/#openvpn" title="Tag: openvpn" rel="tag">openvpn</a>&nbsp;
+        <!--a href="/tag/#opennpv" title="Tag: opennpv" rel="tag">opennpv</a-->
+        <a href="/tag/#opennpv" title="Tag: opennpv" rel="tag">opennpv</a>&nbsp;
     
         <!--a href="/tag/#docker" title="Tag: docker" rel="tag">docker</a-->
         <a href="/tag/#docker" title="Tag: docker" rel="tag">docker</a>
@@ -201,21 +201,21 @@
 </ul>
 
 <h2 id="需求">需求</h2>
-<p>有时候需要查阅资料，不得不借助各种梯子，都不是很稳定，风险不能自己掌控，很难受。。于是想用openvpn自己搭建一个。</p>
+<p>有时候需要查阅资料，不得不借助各种工具，都不是很稳定，风险不能自己掌控，很难受。。于是想用’opennpv’自己搭建一个，为了提交这篇文章所有改了所有的为opennpv。</p>
 
 <h2 id="准备工具">准备工具</h2>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. 云服务器，可以买阿里云或者腾讯云，注意是否有跨境需求决定服务器位置
-2. 云服务器上安装docker和openvpn
-3. 客户端linux使用openvpn，windows使用OpenVpnGUI，android上使用OpenVpnAPP
+2. 云服务器上安装docker和opennpv
+3. 客户端linux使用opennpv，windows使用OpenNpvGUI，android上使用OpenNpvAPP
 </code></pre></div></div>
 
 <h2 id="使用脚本配置服务器">使用脚本配置服务器</h2>
 <p>便于后续服务器迁移，使用脚本进行配置</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/sh
 #配置文件存放目录
-DIR="/root/openvpn/ovpn-data"
+DIR="/root/opennpv/ovpn-data"
 #docker 容器名称
-NAME="openvpn"
+NAME="opennpv"
 #端口
 PORT=yourCustomPort
 #服务器域名或IP
@@ -228,27 +228,27 @@ function main {
         "setup")
             rm ${DIR} -rf
             mkdir -p ${DIR}
-            docker run -v ${DIR}:/etc/openvpn --rm kylemanna/openvpn ovpn_genconfig -u ${PROTO}://${DSTIP}
-            docker run -v ${DIR}:/etc/openvpn --rm -it kylemanna/openvpn ovpn_initpki
-            sed "s/port .*/port ${PORT}/" -i ${DIR}/openvpn.conf
+            docker run -v ${DIR}:/etc/opennpv --rm kylemanna/opennpv ovpn_genconfig -u ${PROTO}://${DSTIP}
+            docker run -v ${DIR}:/etc/opennpv --rm -it kylemanna/opennpv ovpn_initpki
+            sed "s/port .*/port ${PORT}/" -i ${DIR}/opennpv.conf
             sed "s/declare -x OVPN_PORT=.*/declare -x OVPN_PORT=${PORT}/" -i ${DIR}/ovpn_env.sh
         return
         ;;
         "run")
             docker stop ${NAME} &gt;/dev/null 2&gt;&amp;1
             docker rm ${NAME} &gt;/dev/null 2&gt;&amp;1
-            sed "s/port .*/port ${PORT}/" -i ${DIR}/openvpn.conf
+            sed "s/port .*/port ${PORT}/" -i ${DIR}/opennpv.conf
             sed "s/declare -x OVPN_PORT=.*/declare -x OVPN_PORT=${PORT}/" -i ${DIR}/ovpn_env.sh
-            docker run --name ${NAME} -v ${DIR}:/etc/openvpn -d --net host --cap-add=NET_ADMIN kylemanna/openvpn
+            docker run --name ${NAME} -v ${DIR}:/etc/opennpv -d --net host --cap-add=NET_ADMIN kylemanna/opennpv
         return
         ;;
         "product")
-            docker run -v ${DIR}:/etc/openvpn --rm -it kylemanna/openvpn easyrsa build-client-full $2 nopass
-            docker run -v ${DIR}:/etc/openvpn --rm kylemanna/openvpn ovpn_getclient $2&gt; $2.ovpn
+            docker run -v ${DIR}:/etc/opennpv --rm -it kylemanna/opennpv easyrsa build-client-full $2 nopass
+            docker run -v ${DIR}:/etc/opennpv --rm kylemanna/opennpv ovpn_getclient $2&gt; $2.ovpn
         return
         ;;
         "log")
-                docker exec ${NAME} cat /tmp/openvpn-status.log
+                docker exec ${NAME} cat /tmp/opennpv-status.log
                 return
         ;;
     esac
@@ -271,7 +271,7 @@ function main {
 
 <ol>
   <li>linux中使用命令
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo openvpn --daemon --config xx.ovpn
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo opennpv --daemon --config xx.ovpn
 </code></pre></div>    </div>
   </li>
   <li>
@@ -288,9 +288,9 @@ function main {
 
 <h2 id="参考资料">参考资料</h2>
 
-<p><a href="https://github.com/kylemanna/docker-openvpn">https://github.com/kylemanna/docker-openvpn</a></p>
+<p><a href="https://github.com/kylemanna/docker-opennpv">https://github.com/kylemanna/docker-opennpv</a></p>
 
-<p><a href="https://github.com/OpenVPN/openvpn">https://github.com/OpenVPN/openvpn</a></p>
+<p><a href="https://github.com/OpenVPN/opennpv">https://github.com/OpenVPN/opennpv</a></p>
 
         </article>
         <hr>

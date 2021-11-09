@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "搭建VPN服务器"
+title:  "搭建NPV服务器"
 categories: 后端 网络
-tags:  openvpn docker
+tags:  opennpv docker
 author: liubo
 typora-root-url: ..
 ---
@@ -12,12 +12,12 @@ typora-root-url: ..
 
 
 ## 需求
-有时候需要查阅资料，不得不借助各种梯子，都不是很稳定，风险不能自己掌控，很难受。。于是想用openvpn自己搭建一个。
+有时候需要查阅资料，不得不借助各种工具，都不是很稳定，风险不能自己掌控，很难受。。于是想用'opennpv'自己搭建一个，为了提交这篇文章所有改了所有的为opennpv。
 
 ## 准备工具
     1. 云服务器，可以买阿里云或者腾讯云，注意是否有跨境需求决定服务器位置
-    2. 云服务器上安装docker和openvpn
-    3. 客户端linux使用openvpn，windows使用OpenVpnGUI，android上使用OpenVpnAPP
+    2. 云服务器上安装docker和opennpv
+    3. 客户端linux使用opennpv，windows使用OpenNpvGUI，android上使用OpenNpvAPP
 
 
 
@@ -27,9 +27,9 @@ typora-root-url: ..
 ```
 #!/bin/sh
 #配置文件存放目录
-DIR="/root/openvpn/ovpn-data"
+DIR="/root/opennpv/ovpn-data"
 #docker 容器名称
-NAME="openvpn"
+NAME="opennpv"
 #端口
 PORT=yourCustomPort
 #服务器域名或IP
@@ -42,27 +42,27 @@ function main {
         "setup")
             rm ${DIR} -rf
             mkdir -p ${DIR}
-            docker run -v ${DIR}:/etc/openvpn --rm kylemanna/openvpn ovpn_genconfig -u ${PROTO}://${DSTIP}
-            docker run -v ${DIR}:/etc/openvpn --rm -it kylemanna/openvpn ovpn_initpki
-            sed "s/port .*/port ${PORT}/" -i ${DIR}/openvpn.conf
+            docker run -v ${DIR}:/etc/opennpv --rm kylemanna/opennpv ovpn_genconfig -u ${PROTO}://${DSTIP}
+            docker run -v ${DIR}:/etc/opennpv --rm -it kylemanna/opennpv ovpn_initpki
+            sed "s/port .*/port ${PORT}/" -i ${DIR}/opennpv.conf
             sed "s/declare -x OVPN_PORT=.*/declare -x OVPN_PORT=${PORT}/" -i ${DIR}/ovpn_env.sh
         return
         ;;
         "run")
             docker stop ${NAME} >/dev/null 2>&1
             docker rm ${NAME} >/dev/null 2>&1
-            sed "s/port .*/port ${PORT}/" -i ${DIR}/openvpn.conf
+            sed "s/port .*/port ${PORT}/" -i ${DIR}/opennpv.conf
             sed "s/declare -x OVPN_PORT=.*/declare -x OVPN_PORT=${PORT}/" -i ${DIR}/ovpn_env.sh
-            docker run --name ${NAME} -v ${DIR}:/etc/openvpn -d --net host --cap-add=NET_ADMIN kylemanna/openvpn
+            docker run --name ${NAME} -v ${DIR}:/etc/opennpv -d --net host --cap-add=NET_ADMIN kylemanna/opennpv
         return
         ;;
         "product")
-            docker run -v ${DIR}:/etc/openvpn --rm -it kylemanna/openvpn easyrsa build-client-full $2 nopass
-            docker run -v ${DIR}:/etc/openvpn --rm kylemanna/openvpn ovpn_getclient $2> $2.ovpn
+            docker run -v ${DIR}:/etc/opennpv --rm -it kylemanna/opennpv easyrsa build-client-full $2 nopass
+            docker run -v ${DIR}:/etc/opennpv --rm kylemanna/opennpv ovpn_getclient $2> $2.ovpn
         return
         ;;
         "log")
-                docker exec ${NAME} cat /tmp/openvpn-status.log
+                docker exec ${NAME} cat /tmp/opennpv-status.log
                 return
         ;;
     esac
@@ -81,7 +81,7 @@ function main {
 
 1. linux中使用命令
 ```
-sudo openvpn --daemon --config xx.ovpn
+sudo opennpv --daemon --config xx.ovpn
 ```
 
 2. windows导入配置即可
@@ -94,6 +94,6 @@ sudo openvpn --daemon --config xx.ovpn
 
 ## 参考资料
 
-<https://github.com/kylemanna/docker-openvpn>
+<https://github.com/kylemanna/docker-opennpv>
 
-<https://github.com/OpenVPN/openvpn>
+<https://github.com/OpenVPN/opennpv>
