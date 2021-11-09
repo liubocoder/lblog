@@ -76,7 +76,7 @@ route delete 0.0.0.0 10.0.0.1
 windows网卡的跃点数一般配置的自动跃点数，可以在网卡属性ipv4或ipv6的高级属性中修改成自定义的跃点数
 ```
 
-## openvpn客户端启动后会修改默认路由
+## opennpv客户端启动后会修改默认路由
 ![img](/assets/blog-img/net-route-1-1.png)
 
 将不认识的ip报文都转到tun0，内部再转向vpn服务器地址，从enp1s0网卡发出
